@@ -193,16 +193,12 @@ export class BibleApiService {
   /**
    * Busca por texto (versículos que contenham a palavra/frase)
    */
-  static async searchText(query: string): Promise<Array<{
+  static async searchText(query: string, language: string = 'pt-BR'): Promise<Array<{
     book: Book
     chapter: number
     verse: number
     text: string
   }>> {
-    // Para busca, vamos usar uma abordagem diferente
-    // A Bible API não tem busca direta, então vamos implementar uma busca local
-    // ou usar uma API diferente para busca
-    
     const results: Array<{
       book: Book
       chapter: number
@@ -210,11 +206,29 @@ export class BibleApiService {
       text: string
     }> = []
 
-    // Por enquanto, retorna array vazio
-    // Em uma implementação real, você usaria uma API de busca ou
-    // implementaria uma busca local com dados pré-carregados
-    
-    return results
+    try {
+      // Buscar apenas nos dados locais disponíveis para evitar problemas de CORS
+      const localChapter = getLocalBibleChapter('genesis', 1, language)
+      
+      if (localChapter) {
+        localChapter.verses.forEach(verse => {
+          if (verse.text.toLowerCase().includes(query.toLowerCase())) {
+            results.push({
+              book: { id: 'genesis', name: 'Genesis', chapters: 1 } as Book,
+              chapter: 1,
+              verse: verse.number,
+              text: verse.text
+            })
+          }
+        })
+      }
+
+      // Limita resultados para performance
+      return results.slice(0, 20)
+    } catch (error) {
+      console.error('Erro na busca:', error)
+      return []
+    }
   }
 
   /**

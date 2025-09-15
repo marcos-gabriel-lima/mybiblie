@@ -139,6 +139,7 @@ interface UseBibleSearchReturn {
 }
 
 export function useBibleSearch(): UseBibleSearchReturn {
+  const { i18n } = useTranslation()
   const [results, setResults] = useState<Array<{
     book: Book
     chapter: number
@@ -158,7 +159,7 @@ export function useBibleSearch(): UseBibleSearchReturn {
     setError(null)
 
     try {
-      const searchResults = await BibleApiService.searchText(query)
+      const searchResults = await BibleApiService.searchText(query, i18n.language)
       setResults(searchResults)
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Erro na busca'

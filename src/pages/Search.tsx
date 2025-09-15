@@ -114,7 +114,7 @@ export function Search() {
       )}
 
       {/* No Results */}
-      {searchTerm && results.length === 0 && !isSearching && (
+      {searchTerm && results.length === 0 && !loading && (
         <div className="text-center py-12">
           <SearchIcon className="w-16 h-16 text-gray-300 mx-auto mb-4" />
           <h3 className="text-lg font-semibold text-gray-900 mb-2">
