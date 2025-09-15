@@ -7,9 +7,27 @@ const cache = new Map<string, any>()
 
 // Mapeamento de traduções por idioma
 const TRANSLATION_MAPPING: Record<string, string> = {
-  'pt-BR': 'kjv', // Usando KJV como padrão (ACF não disponível na API)
+  'pt-BR': 'kjv', // Usando KJV e traduzindo para português
   'en-US': 'kjv', // King James Version (English)
-  'es-ES': 'kjv' // Usando KJV como padrão (RV1960 não disponível na API)
+  'es-ES': 'kjv' // Usando KJV e traduzindo para espanhol
+}
+
+// Função para traduzir texto usando API gratuita
+async function translateText(text: string, targetLanguage: string): Promise<string> {
+  try {
+    // Usando MyMemory API (gratuita e sem necessidade de chave)
+    const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|${targetLanguage}`)
+    const data = await response.json()
+    
+    if (data.responseStatus === 200 && data.responseData) {
+      return data.responseData.translatedText
+    }
+    
+    return text // Retorna texto original se tradução falhar
+  } catch (error) {
+    console.warn('Erro na tradução:', error)
+    return text // Retorna texto original se tradução falhar
+  }
 }
 
 export interface BibleApiResponse {
@@ -78,13 +96,31 @@ export class BibleApiService {
 
       const data: BibleApiResponse = await response.json()
       
+      // Se não for inglês, traduz os versículos
+      let verses = data.verses.map(verse => ({
+        number: verse.verse,
+        text: verse.text.trim()
+      }))
+
+      // Traduz para português ou espanhol se necessário
+      if (language === 'pt-BR' || language === 'es-ES') {
+        const targetLang = language === 'pt-BR' ? 'pt' : 'es'
+        
+        // Traduz cada versículo
+        const translatedVerses = await Promise.all(
+          verses.map(async (verse) => ({
+            ...verse,
+            text: await translateText(verse.text, targetLang)
+          }))
+        )
+        
+        verses = translatedVerses
+      }
+      
       // Converte para nossa estrutura
       const chapter: Chapter = {
         number: chapterNumber,
-        verses: data.verses.map(verse => ({
-          number: verse.verse,
-          text: verse.text.trim()
-        }))
+        verses: verses
       }
 
       // Salva no cache
