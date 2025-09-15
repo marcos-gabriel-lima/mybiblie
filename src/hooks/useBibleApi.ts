@@ -16,6 +16,15 @@ export function useBibleApi(): UseBibleApiReturn {
   const [chapter, setChapter] = useState<Chapter | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [currentLanguage, setCurrentLanguage] = useState(i18n.language)
+
+  // Limpa o cache quando o idioma muda
+  useEffect(() => {
+    if (currentLanguage !== i18n.language) {
+      setCurrentLanguage(i18n.language)
+      setChapter(null) // Limpa o capítulo atual para forçar recarregamento
+    }
+  }, [i18n.language, currentLanguage])
 
   const loadChapter = useCallback(async (bookId: string, chapterNumber: number) => {
     setLoading(true)

@@ -33,7 +33,7 @@ export class BibleApiService {
    */
   static async getChapter(bookName: string, chapterNumber: number, language: string = 'pt-BR'): Promise<Chapter | null> {
     const translation = TRANSLATION_MAPPING[language] || TRANSLATION_MAPPING['pt-BR']
-    const cacheKey = `${bookName}-${chapterNumber}-${translation}`
+    const cacheKey = `${bookName}-${chapterNumber}-${language}`
     
     // Verifica cache primeiro
     if (cache.has(cacheKey)) {
