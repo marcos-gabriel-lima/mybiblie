@@ -1,0 +1,166 @@
+{
+  "app": {
+    "title": "Bible App",
+    "subtitle": "Read the Word of God with a modern and intuitive experience"
+  },
+  "navigation": {
+    "home": "Home",
+    "books": "Books",
+    "search": "Search",
+    "favorites": "Favorites",
+    "notes": "Notes"
+  },
+  "home": {
+    "welcome": "Welcome to",
+    "description": "Read the Word of God with a modern and intuitive experience. Explore, study and meditate on the Holy Bible.",
+    "startReading": "Start Reading",
+    "searchVerse": "Search Verse",
+    "features": "Features",
+    "recentReads": "Recent Reads",
+    "dailyVerse": "Verse of the Day",
+    "featuresList": {
+      "reading": {
+        "title": "Complete Reading",
+        "description": "Access all 66 books of the Holy Bible with a clean and easy-to-use interface."
+      },
+      "search": {
+        "title": "Advanced Search",
+        "description": "Find specific verses or keywords throughout the Bible quickly."
+      },
+      "favorites": {
+        "title": "Favorites",
+        "description": "Save your favorite verses for quick and easy access."
+      },
+      "notes": {
+        "title": "Personal Notes",
+        "description": "Add your own notes and reflections to verses."
+      }
+    }
+  },
+  "books": {
+    "title": "Books of the Bible",
+    "subtitle": "Choose a book to start your reading",
+    "searchPlaceholder": "Search book...",
+    "all": "All",
+    "oldTestament": "Old Testament",
+    "newTestament": "New Testament",
+    "chapters": "chapters",
+    "chapter": "chapter",
+    "noResults": "No books found",
+    "noResultsDescription": "Try adjusting your search or filter to find the desired book."
+  },
+  "chapter": {
+    "backToBooks": "Back to Books",
+    "previousChapter": "Previous Chapter",
+    "nextChapter": "Next Chapter",
+    "fontSize": "Font size:",
+    "fontSizeOptions": {
+      "small": "Small",
+      "medium": "Medium",
+      "large": "Large",
+      "xlarge": "Extra Large"
+    },
+    "loading": "Loading chapter...",
+    "error": "Error loading chapter",
+    "retry": "Try Again",
+    "bookNotFound": "Book not found",
+    "chapterNotFound": "Chapter not found",
+    "of": "of"
+  },
+  "search": {
+    "title": "Search the Bible",
+    "subtitle": "Find specific verses or keywords",
+    "placeholder": "Type a word or phrase to search...",
+    "search": "Search",
+    "searching": "Searching...",
+    "results": "results found",
+    "result": "result found",
+    "noResults": "No results found",
+    "noResultsDescription": "Try using different words or check the spelling.",
+    "error": "Search Error",
+    "retry": "Try Again",
+    "tips": {
+      "title": "Search Tips",
+      "tip1": "Use specific keywords to find relevant verses",
+      "tip2": "Search for themes like \"love\", \"faith\", \"hope\", \"salvation\"",
+      "tip3": "Look for known phrases like \"For God so loved the world\"",
+      "tip4": "Search is case-insensitive"
+    }
+  },
+  "favorites": {
+    "title": "My Favorites",
+    "empty": "You don't have any favorite verses yet",
+    "count": "favorite verses",
+    "countOne": "favorite verse",
+    "noFavorites": "No favorites yet",
+    "noFavoritesDescription": "Start reading the Bible and mark your favorite verses by clicking the heart icon.",
+    "startReading": "Start Reading",
+    "clearAll": "Clear All",
+    "addedOn": "Added on",
+    "read": "Read",
+    "remove": "Remove from favorites",
+    "tips": {
+      "title": "How to use Favorites",
+      "tip1": "Click the heart icon on any verse to add it to favorites",
+      "tip2": "Your favorites are saved locally in your browser",
+      "tip3": "Use favorites to revisit verses that touched your heart",
+      "tip4": "You can remove favorites individually or clear all at once"
+    }
+  },
+  "notes": {
+    "title": "My Notes",
+    "empty": "You don't have any personal notes yet",
+    "count": "notes",
+    "note": "note",
+    "newNote": "New Note",
+    "clearAll": "Clear All",
+    "noNotes": "No notes yet",
+    "noNotesDescription": "Start adding your personal reflections on Bible verses.",
+    "createFirst": "Create First Note",
+    "addNote": "Add New Note",
+    "book": "Book",
+    "selectBook": "Select a book",
+    "chapter": "Chapter",
+    "verse": "Verse",
+    "verseText": "Verse Text",
+    "verseTextPlaceholder": "Type the verse text...",
+    "myNote": "My Note:",
+    "notePlaceholder": "Write your reflection or note about this verse...",
+    "cancel": "Cancel",
+    "save": "Save Note",
+    "edit": "Edit note",
+    "delete": "Delete note",
+    "createdOn": "Created on",
+    "updatedOn": "Updated on",
+    "readContext": "Read Context",
+    "tips": {
+      "title": "How to use Notes",
+      "tip1": "Add your personal reflections on specific verses",
+      "tip2": "Use notes to record insights, prayers or practical applications",
+      "tip3": "Your notes are saved locally in your browser",
+      "tip4": "You can edit or delete your notes at any time",
+      "tip5": "Notes help deepen your personal Bible study"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Try Again",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK",
+    "read": "Read"
+  },
+  "language": {
+    "select": "Select language",
+    "portuguese": "Português",
+    "english": "English",
+    "spanish": "Español"
+  }
+}

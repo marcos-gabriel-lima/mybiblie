@@ -1,0 +1,166 @@
+{
+  "app": {
+    "title": "App Biblia",
+    "subtitle": "Lee la Palabra de Dios con una experiencia moderna e intuitiva"
+  },
+  "navigation": {
+    "home": "Inicio",
+    "books": "Libros",
+    "search": "Buscar",
+    "favorites": "Favoritos",
+    "notes": "Notas"
+  },
+  "home": {
+    "welcome": "Bienvenido a",
+    "description": "Lee la Palabra de Dios con una experiencia moderna e intuitiva. Explora, estudia y medita en la Santa Biblia.",
+    "startReading": "Comenzar Lectura",
+    "searchVerse": "Buscar Versículo",
+    "features": "Características",
+    "recentReads": "Lecturas Recientes",
+    "dailyVerse": "Versículo del Día",
+    "featuresList": {
+      "reading": {
+        "title": "Lectura Completa",
+        "description": "Accede a los 66 libros de la Santa Biblia con una interfaz limpia y fácil de usar."
+      },
+      "search": {
+        "title": "Búsqueda Avanzada",
+        "description": "Encuentra versículos específicos o palabras clave en toda la Biblia rápidamente."
+      },
+      "favorites": {
+        "title": "Favoritos",
+        "description": "Guarda tus versículos favoritos para acceso rápido y fácil."
+      },
+      "notes": {
+        "title": "Notas Personales",
+        "description": "Añade tus propias notas y reflexiones a los versículos."
+      }
+    }
+  },
+  "books": {
+    "title": "Libros de la Biblia",
+    "subtitle": "Elige un libro para comenzar tu lectura",
+    "searchPlaceholder": "Buscar libro...",
+    "all": "Todos",
+    "oldTestament": "Antiguo Testamento",
+    "newTestament": "Nuevo Testamento",
+    "chapters": "capítulos",
+    "chapter": "capítulo",
+    "noResults": "No se encontraron libros",
+    "noResultsDescription": "Intenta ajustar tu búsqueda o filtro para encontrar el libro deseado."
+  },
+  "chapter": {
+    "backToBooks": "Volver a Libros",
+    "previousChapter": "Capítulo Anterior",
+    "nextChapter": "Siguiente Capítulo",
+    "fontSize": "Tamaño de fuente:",
+    "fontSizeOptions": {
+      "small": "Pequeño",
+      "medium": "Mediano",
+      "large": "Grande",
+      "xlarge": "Muy Grande"
+    },
+    "loading": "Cargando capítulo...",
+    "error": "Error al cargar capítulo",
+    "retry": "Intentar de Nuevo",
+    "bookNotFound": "Libro no encontrado",
+    "chapterNotFound": "Capítulo no encontrado",
+    "of": "de"
+  },
+  "search": {
+    "title": "Buscar en la Biblia",
+    "subtitle": "Encuentra versículos específicos o palabras clave",
+    "placeholder": "Escribe una palabra o frase para buscar...",
+    "search": "Buscar",
+    "searching": "Buscando...",
+    "results": "resultados encontrados",
+    "result": "resultado encontrado",
+    "noResults": "No se encontraron resultados",
+    "noResultsDescription": "Intenta usar palabras diferentes o verifica la ortografía.",
+    "error": "Error en la Búsqueda",
+    "retry": "Intentar de Nuevo",
+    "tips": {
+      "title": "Consejos de Búsqueda",
+      "tip1": "Usa palabras clave específicas para encontrar versículos relevantes",
+      "tip2": "Busca temas como \"amor\", \"fe\", \"esperanza\", \"salvación\"",
+      "tip3": "Busca frases conocidas como \"Porque de tal manera amó Dios al mundo\"",
+      "tip4": "La búsqueda no distingue entre mayúsculas y minúsculas"
+    }
+  },
+  "favorites": {
+    "title": "Mis Favoritos",
+    "empty": "Aún no tienes versículos favoritos",
+    "count": "versículos favoritos",
+    "countOne": "versículo favorito",
+    "noFavorites": "Aún no hay favoritos",
+    "noFavoritesDescription": "Comienza a leer la Biblia y marca tus versículos favoritos haciendo clic en el ícono de corazón.",
+    "startReading": "Comenzar Lectura",
+    "clearAll": "Limpiar Todos",
+    "addedOn": "Añadido el",
+    "read": "Leer",
+    "remove": "Remover de favoritos",
+    "tips": {
+      "title": "Cómo usar los Favoritos",
+      "tip1": "Haz clic en el ícono de corazón en cualquier versículo para añadirlo a favoritos",
+      "tip2": "Tus favoritos se guardan localmente en tu navegador",
+      "tip3": "Usa los favoritos para revisitar versículos que tocaron tu corazón",
+      "tip4": "Puedes remover favoritos individualmente o limpiar todos de una vez"
+    }
+  },
+  "notes": {
+    "title": "Mis Notas",
+    "empty": "Aún no tienes notas personales",
+    "count": "notas",
+    "note": "nota",
+    "newNote": "Nueva Nota",
+    "clearAll": "Limpiar Todas",
+    "noNotes": "Aún no hay notas",
+    "noNotesDescription": "Comienza a añadir tus reflexiones personales sobre los versículos de la Biblia.",
+    "createFirst": "Crear Primera Nota",
+    "addNote": "Añadir Nueva Nota",
+    "book": "Libro",
+    "selectBook": "Selecciona un libro",
+    "chapter": "Capítulo",
+    "verse": "Versículo",
+    "verseText": "Texto del Versículo",
+    "verseTextPlaceholder": "Escribe el texto del versículo...",
+    "myNote": "Mi Nota:",
+    "notePlaceholder": "Escribe tu reflexión o nota sobre este versículo...",
+    "cancel": "Cancelar",
+    "save": "Guardar Nota",
+    "edit": "Editar nota",
+    "delete": "Eliminar nota",
+    "createdOn": "Creada el",
+    "updatedOn": "Actualizada el",
+    "readContext": "Leer Contexto",
+    "tips": {
+      "title": "Cómo usar las Notas",
+      "tip1": "Añade tus reflexiones personales sobre versículos específicos",
+      "tip2": "Usa las notas para registrar ideas, oraciones o aplicaciones prácticas",
+      "tip3": "Tus notas se guardan localmente en tu navegador",
+      "tip4": "Puedes editar o eliminar tus notas en cualquier momento",
+      "tip5": "Las notas ayudan a profundizar tu estudio bíblico personal"
+    }
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "retry": "Intentar de Nuevo",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "close": "Cerrar",
+    "confirm": "Confirmar",
+    "yes": "Sí",
+    "no": "No",
+    "ok": "OK",
+    "read": "Leer"
+  },
+  "language": {
+    "select": "Seleccionar idioma",
+    "portuguese": "Português",
+    "english": "English",
+    "spanish": "Español"
+  }
+}

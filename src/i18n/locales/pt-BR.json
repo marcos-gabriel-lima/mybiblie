@@ -1,0 +1,166 @@
+{
+  "app": {
+    "title": "Bíblia App",
+    "subtitle": "Leia a Palavra de Deus com uma experiência moderna e intuitiva"
+  },
+  "navigation": {
+    "home": "Início",
+    "books": "Livros",
+    "search": "Buscar",
+    "favorites": "Favoritos",
+    "notes": "Notas"
+  },
+  "home": {
+    "welcome": "Bem-vindo ao",
+    "description": "Leia a Palavra de Deus com uma experiência moderna e intuitiva. Explore, estude e medite na Bíblia Sagrada.",
+    "startReading": "Começar Leitura",
+    "searchVerse": "Buscar Versículo",
+    "features": "Recursos",
+    "recentReads": "Leituras Recentes",
+    "dailyVerse": "Versículo do Dia",
+    "featuresList": {
+      "reading": {
+        "title": "Leitura Completa",
+        "description": "Acesse todos os 66 livros da Bíblia Sagrada com uma interface limpa e fácil de usar."
+      },
+      "search": {
+        "title": "Busca Avançada",
+        "description": "Encontre versículos específicos ou palavras-chave em toda a Bíblia rapidamente."
+      },
+      "favorites": {
+        "title": "Favoritos",
+        "description": "Salve seus versículos favoritos para acesso rápido e fácil."
+      },
+      "notes": {
+        "title": "Notas Pessoais",
+        "description": "Adicione suas próprias notas e reflexões aos versículos."
+      }
+    }
+  },
+  "books": {
+    "title": "Livros da Bíblia",
+    "subtitle": "Escolha um livro para começar sua leitura",
+    "searchPlaceholder": "Buscar livro...",
+    "all": "Todos",
+    "oldTestament": "Antigo Testamento",
+    "newTestament": "Novo Testamento",
+    "chapters": "capítulos",
+    "chapter": "capítulo",
+    "noResults": "Nenhum livro encontrado",
+    "noResultsDescription": "Tente ajustar sua busca ou filtro para encontrar o livro desejado."
+  },
+  "chapter": {
+    "backToBooks": "Voltar aos Livros",
+    "previousChapter": "Capítulo Anterior",
+    "nextChapter": "Próximo Capítulo",
+    "fontSize": "Tamanho da fonte:",
+    "fontSizeOptions": {
+      "small": "Pequeno",
+      "medium": "Médio",
+      "large": "Grande",
+      "xlarge": "Muito Grande"
+    },
+    "loading": "Carregando capítulo...",
+    "error": "Erro ao carregar capítulo",
+    "retry": "Tentar Novamente",
+    "bookNotFound": "Livro não encontrado",
+    "chapterNotFound": "Capítulo não encontrado",
+    "of": "de"
+  },
+  "search": {
+    "title": "Buscar na Bíblia",
+    "subtitle": "Encontre versículos específicos ou palavras-chave",
+    "placeholder": "Digite uma palavra ou frase para buscar...",
+    "search": "Buscar",
+    "searching": "Buscando...",
+    "results": "resultados encontrados",
+    "result": "resultado encontrado",
+    "noResults": "Nenhum resultado encontrado",
+    "noResultsDescription": "Tente usar palavras diferentes ou verifique a ortografia.",
+    "error": "Erro na Busca",
+    "retry": "Tentar Novamente",
+    "tips": {
+      "title": "Dicas de Busca",
+      "tip1": "Use palavras-chave específicas para encontrar versículos relevantes",
+      "tip2": "Busque por temas como \"amor\", \"fé\", \"esperança\", \"salvação\"",
+      "tip3": "Procure por frases conhecidas como \"Porque Deus amou o mundo\"",
+      "tip4": "A busca é case-insensitive (não diferencia maiúsculas de minúsculas)"
+    }
+  },
+  "favorites": {
+    "title": "Meus Favoritos",
+    "empty": "Você ainda não tem versículos favoritos",
+    "count": "versículos favoritos",
+    "countOne": "versículo favorito",
+    "noFavorites": "Nenhum favorito ainda",
+    "noFavoritesDescription": "Comece a ler a Bíblia e marque seus versículos favoritos clicando no ícone de coração.",
+    "startReading": "Começar Leitura",
+    "clearAll": "Limpar Todos",
+    "addedOn": "Adicionado em",
+    "read": "Ler",
+    "remove": "Remover dos favoritos",
+    "tips": {
+      "title": "Como usar os Favoritos",
+      "tip1": "Clique no ícone de coração em qualquer versículo para adicioná-lo aos favoritos",
+      "tip2": "Seus favoritos são salvos localmente no seu navegador",
+      "tip3": "Use os favoritos para revisitar versículos que tocaram seu coração",
+      "tip4": "Você pode remover favoritos individualmente ou limpar todos de uma vez"
+    }
+  },
+  "notes": {
+    "title": "Minhas Notas",
+    "empty": "Você ainda não tem notas pessoais",
+    "count": "notas",
+    "note": "nota",
+    "newNote": "Nova Nota",
+    "clearAll": "Limpar Todas",
+    "noNotes": "Nenhuma nota ainda",
+    "noNotesDescription": "Comece a adicionar suas reflexões pessoais sobre os versículos da Bíblia.",
+    "createFirst": "Criar Primeira Nota",
+    "addNote": "Adicionar Nova Nota",
+    "book": "Livro",
+    "selectBook": "Selecione um livro",
+    "chapter": "Capítulo",
+    "verse": "Versículo",
+    "verseText": "Texto do Versículo",
+    "verseTextPlaceholder": "Digite o texto do versículo...",
+    "myNote": "Minha Nota:",
+    "notePlaceholder": "Escreva sua reflexão ou nota sobre este versículo...",
+    "cancel": "Cancelar",
+    "save": "Salvar Nota",
+    "edit": "Editar nota",
+    "delete": "Excluir nota",
+    "createdOn": "Criada em",
+    "updatedOn": "Atualizada em",
+    "readContext": "Ler Contexto",
+    "tips": {
+      "title": "Como usar as Notas",
+      "tip1": "Adicione suas reflexões pessoais sobre versículos específicos",
+      "tip2": "Use as notas para registrar insights, orações ou aplicações práticas",
+      "tip3": "Suas notas são salvas localmente no seu navegador",
+      "tip4": "Você pode editar ou excluir suas notas a qualquer momento",
+      "tip5": "As notas ajudam a aprofundar seu estudo bíblico pessoal"
+    }
+  },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Erro",
+    "retry": "Tentar Novamente",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "close": "Fechar",
+    "confirm": "Confirmar",
+    "yes": "Sim",
+    "no": "Não",
+    "ok": "OK",
+    "read": "Ler"
+  },
+  "language": {
+    "select": "Selecionar idioma",
+    "portuguese": "Português",
+    "english": "English",
+    "spanish": "Español"
+  }
+}
