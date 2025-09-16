@@ -1,6 +1,6 @@
 import { Book, Chapter, Verse } from '../types/bible'
 import { API_CONFIG, DEV_CONFIG } from '../config/api'
-import { getLocalBibleChapter, isLocalChapterAvailable } from '../data/bibleData'
+import { getLocalBibleChapter, isLocalChapterAvailable, LOCAL_BIBLE_DATA } from '../data/bibleData'
 
 // Cache para evitar requisições desnecessárias
 const cache = new Map<string, any>()
@@ -102,20 +102,21 @@ export class BibleApiService {
         text: verse.text.trim()
       }))
 
+      // Temporariamente desabilitado para evitar "Too Many Requests"
       // Traduz para português ou espanhol se necessário
-      if (language === 'pt-BR' || language === 'es-ES') {
-        const targetLang = language === 'pt-BR' ? 'pt' : 'es'
-        
-        // Traduz cada versículo
-        const translatedVerses = await Promise.all(
-          verses.map(async (verse) => ({
-            ...verse,
-            text: await translateText(verse.text, targetLang)
-          }))
-        )
-        
-        verses = translatedVerses
-      }
+      // if (language === 'pt-BR' || language === 'es-ES') {
+      //   const targetLang = language === 'pt-BR' ? 'pt' : 'es'
+      //   
+      //   // Traduz cada versículo
+      //   const translatedVerses = await Promise.all(
+      //     verses.map(async (verse) => ({
+      //       ...verse,
+      //       text: await translateText(verse.text, targetLang)
+      //     }))
+      //   )
+      //   
+      //   verses = translatedVerses
+      // }
       
       // Converte para nossa estrutura
       const chapter: Chapter = {
@@ -207,19 +208,25 @@ export class BibleApiService {
     }> = []
 
     try {
-      // Buscar apenas nos dados locais disponíveis para evitar problemas de CORS
-      const localChapter = getLocalBibleChapter('genesis', 1, language)
+      // Buscar em todos os dados locais disponíveis para uma busca mais robusta
+      const languageData = LOCAL_BIBLE_DATA[language]
       
-      if (localChapter) {
-        localChapter.verses.forEach(verse => {
-          if (verse.text.toLowerCase().includes(query.toLowerCase())) {
-            results.push({
-              book: { id: 'genesis', name: 'Genesis', chapters: 1 } as Book,
-              chapter: 1,
-              verse: verse.number,
-              text: verse.text
+      if (languageData) {
+        // Buscar em todos os livros disponíveis
+        Object.entries(languageData).forEach(([bookId, chapters]) => {
+          Object.entries(chapters).forEach(([chapterNum, chapter]) => {
+            chapter.verses.forEach(verse => {
+              if (verse.text.toLowerCase().includes(query.toLowerCase())) {
+                const bookName = bookId.charAt(0).toUpperCase() + bookId.slice(1)
+                results.push({
+                  book: { id: bookId, name: bookName, chapters: parseInt(chapterNum) } as Book,
+                  chapter: parseInt(chapterNum),
+                  verse: verse.number,
+                  text: verse.text
+                })
+              }
             })
-          }
+          })
         })
       }
 

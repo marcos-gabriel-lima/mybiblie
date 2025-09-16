@@ -53,6 +53,7 @@
     "backToBooks": "Back to Books",
     "previousChapter": "Previous Chapter",
     "nextChapter": "Next Chapter",
+    "chapter": "Chapter",
     "fontSize": "Font size:",
     "fontSizeOptions": {
       "small": "Small",

@@ -1,11 +1,12 @@
 import { useParams, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { books } from '../data/bible'
-import { ArrowLeft, ArrowRight, Heart, StickyNote, Share2 } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Heart, Share2 } from 'lucide-react'
 import { useBibleApi } from '../hooks/useBibleApi'
 import { LoadingSpinner } from '../components/LoadingSpinner'
 import { ErrorState } from '../components/ErrorState'
 import { useTranslation } from 'react-i18next'
+import { Favorite } from '../types/bible'
 
 export function Chapter() {
   const { t, i18n } = useTranslation()
@@ -13,6 +14,7 @@ export function Chapter() {
   const [book, setBook] = useState<any>(null)
   const [isFavorite, setIsFavorite] = useState(false)
   const [fontSize, setFontSize] = useState('medium')
+  const [favorites, setFavorites] = useState<Favorite[]>([])
   
   const { chapter, loading, error, loadChapter, clearError } = useBibleApi()
 
@@ -26,6 +28,14 @@ export function Chapter() {
       loadChapter(bookId, parseInt(chapterNumber))
     }
   }, [bookId, chapterNumber, loadChapter, i18n.language])
+
+  useEffect(() => {
+    // Load favorites from localStorage
+    const savedFavorites = localStorage.getItem('bible-favorites')
+    if (savedFavorites) {
+      setFavorites(JSON.parse(savedFavorites))
+    }
+  }, [])
 
   const handlePreviousChapter = () => {
     if (book && chapterNumber) {
@@ -68,6 +78,67 @@ export function Chapter() {
       navigator.clipboard.writeText(window.location.href)
       alert('Link copiado para a área de transferência!')
     }
+  }
+
+  const handleToggleVerseFavorite = (verse: any) => {
+    console.log('handleToggleVerseFavorite called with:', { verse, bookId, chapterNumber, book })
+    if (!bookId || !chapterNumber || !book) {
+      console.log('Missing required data:', { bookId, chapterNumber, book })
+      return
+    }
+
+    const verseId = `${bookId}-${chapterNumber}-${verse.number}`
+    console.log('Generated verseId:', verseId)
+    const existingFavorite = favorites.find(fav => fav.id === verseId)
+    console.log('Existing favorite found:', existingFavorite)
+
+    let updatedFavorites: Favorite[]
+
+    if (existingFavorite) {
+      // Remove from favorites
+      updatedFavorites = favorites.filter(fav => fav.id !== verseId)
+    } else {
+      // Add to favorites
+      const newFavorite: Favorite = {
+        id: verseId,
+        bookId: bookId,
+        chapter: parseInt(chapterNumber),
+        verse: verse.number,
+        text: verse.text,
+        addedAt: new Date()
+      }
+      updatedFavorites = [...favorites, newFavorite]
+    }
+
+    setFavorites(updatedFavorites)
+    console.log('Updated favorites state:', updatedFavorites)
+    
+    // Convert dates to strings for localStorage
+    const favoritesForStorage = updatedFavorites.map(fav => ({
+      ...fav,
+      addedAt: fav.addedAt.toISOString()
+    }))
+    console.log('Favorites for storage:', favoritesForStorage)
+    
+    const storageString = JSON.stringify(favoritesForStorage)
+    console.log('Storage string:', storageString)
+    
+    localStorage.setItem('bible-favorites', storageString)
+    console.log('Saved to localStorage, verifying...')
+    
+    // Verify what was actually saved
+    const saved = localStorage.getItem('bible-favorites')
+    console.log('Verification - what was saved:', saved)
+    
+    console.log('Favorito salvo:', existingFavorite ? 'removido' : 'adicionado', verseId)
+    console.log('Total de favoritos agora:', updatedFavorites.length)
+    
+    // Dispatch custom event to notify other components
+    const event = new CustomEvent('favoritesUpdated', { 
+      detail: { favorites: updatedFavorites } 
+    })
+    console.log('Dispatching favoritesUpdated event:', event)
+    window.dispatchEvent(event)
   }
 
   const fontSizeClasses = {
@@ -182,16 +253,36 @@ export function Chapter() {
       {/* Chapter Content */}
       <div className="card">
         <div className={`verse-text ${fontSizeClasses[fontSize as keyof typeof fontSizeClasses]} leading-relaxed space-y-3 md:space-y-4`}>
-          {chapter.verses.map((verse: any) => (
-            <p key={verse.number} className="flex items-start space-x-2 md:space-x-3">
-              <span className="verse-number flex-shrink-0 mt-1 text-sm md:text-base">
-                {verse.number}
-              </span>
-              <span className="flex-1 text-sm md:text-base leading-relaxed">
-                {verse.text}
-              </span>
-            </p>
-          ))}
+          {chapter.verses.map((verse: any) => {
+            const verseId = `${bookId}-${chapterNumber}-${verse.number}`
+            const isVerseFavorite = favorites.some(fav => fav.id === verseId)
+            
+            return (
+                 <div key={verse.number} className="flex items-start space-x-2 md:space-x-3 group">
+                   <span className="verse-number flex-shrink-0 mt-1 text-sm md:text-base">
+                     {verse.number}
+                   </span>
+                   <span className="flex-1 text-sm md:text-base leading-relaxed">
+                     {verse.text}
+                   </span>
+                   <button
+                     onClick={() => {
+                       console.log('Heart button clicked for verse:', verse.number)
+                       handleToggleVerseFavorite(verse)
+                     }}
+                     onMouseEnter={() => console.log('Mouse entered verse', verse.number)}
+                     className={`opacity-100 transition-opacity p-1 rounded ${
+                       isVerseFavorite 
+                         ? 'text-red-500 bg-red-50' 
+                         : 'text-gray-400 hover:text-red-500 hover:bg-red-50'
+                     }`}
+                     title={isVerseFavorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}
+                   >
+                     <Heart className={`w-4 h-4 ${isVerseFavorite ? 'fill-current' : ''}`} />
+                   </button>
+                 </div>
+            )
+          })}
         </div>
       </div>
 

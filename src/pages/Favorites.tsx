@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { Heart, Trash2, BookOpen } from 'lucide-react'
 import { Favorite } from '../types/bible'
 import { books } from '../data/bible'
@@ -8,9 +9,52 @@ export function Favorites() {
 
   useEffect(() => {
     // Load favorites from localStorage
-    const savedFavorites = localStorage.getItem('bible-favorites')
-    if (savedFavorites) {
-      setFavorites(JSON.parse(savedFavorites))
+    const loadFavorites = () => {
+      const savedFavorites = localStorage.getItem('bible-favorites')
+      console.log('Raw localStorage data:', savedFavorites)
+      if (savedFavorites) {
+        try {
+          const parsed = JSON.parse(savedFavorites)
+          console.log('Parsed favorites:', parsed)
+          // Convert string dates back to Date objects
+          const favoritesWithDates = parsed.map((fav: any) => ({
+            ...fav,
+            addedAt: new Date(fav.addedAt)
+          }))
+          console.log('Favorites with dates:', favoritesWithDates)
+          setFavorites(favoritesWithDates)
+        } catch (error) {
+          console.error('Erro ao carregar favoritos:', error)
+          setFavorites([])
+        }
+      } else {
+        console.log('No favorites found in localStorage')
+      }
+    }
+
+    loadFavorites()
+    console.log('Favorites page loaded, checking localStorage...')
+
+    // Listen for storage changes (when favorites are added from other tabs)
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'bible-favorites') {
+        console.log('Storage change detected, reloading favorites...')
+        loadFavorites()
+      }
+    }
+
+    // Listen for custom favorites update event
+    const handleFavoritesUpdate = () => {
+      console.log('Custom favorites update event received, reloading...')
+      loadFavorites()
+    }
+
+    window.addEventListener('storage', handleStorageChange)
+    window.addEventListener('favoritesUpdated', handleFavoritesUpdate)
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange)
+      window.removeEventListener('favoritesUpdated', handleFavoritesUpdate)
     }
   }, [])
 
@@ -62,10 +106,10 @@ export function Favorites() {
           <p className="text-gray-600 mb-6">
             Comece a ler a Bíblia e marque seus versículos favoritos clicando no ícone de coração.
           </p>
-          <a href="/books" className="btn-primary">
+          <Link to="/books" className="btn-primary">
             <BookOpen className="w-4 h-4 mr-2" />
             Começar Leitura
-          </a>
+          </Link>
         </div>
       ) : (
         <div className="space-y-4">
@@ -90,12 +134,12 @@ export function Favorites() {
                     </p>
                   </div>
                   <div className="flex items-center space-x-2 ml-4">
-                    <a
-                      href={`/book/${favorite.bookId}/chapter/${favorite.chapter}`}
+                    <Link
+                      to={`/book/${favorite.bookId}/chapter/${favorite.chapter}`}
                       className="btn-secondary text-sm"
                     >
                       Ler
-                    </a>
+                    </Link>
                     <button
                       onClick={() => removeFavorite(favorite.id)}
                       className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"

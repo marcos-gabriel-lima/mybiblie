@@ -53,6 +53,7 @@
     "backToBooks": "Voltar aos Livros",
     "previousChapter": "Capítulo Anterior",
     "nextChapter": "Próximo Capítulo",
+    "chapter": "Capítulo",
     "fontSize": "Tamanho da fonte:",
     "fontSizeOptions": {
       "small": "Pequeno",

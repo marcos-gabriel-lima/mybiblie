@@ -131,21 +131,156 @@ export const GENESIS_1_ES: LocalBibleChapter = {
   ]
 }
 
+// João 3:16 - Versículo mais conhecido da Bíblia
+export const JOHN_3_16_PT: LocalBibleChapter = {
+  number: 3,
+  verses: [
+    { number: 16, text: "Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna." }
+  ]
+}
+
+export const JOHN_3_16_EN: LocalBibleChapter = {
+  number: 3,
+  verses: [
+    { number: 16, text: "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life." }
+  ]
+}
+
+export const JOHN_3_16_ES: LocalBibleChapter = {
+  number: 3,
+  verses: [
+    { number: 16, text: "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna." }
+  ]
+}
+
+// Salmo 23 - O Senhor é meu pastor
+export const PSALMS_23_PT: LocalBibleChapter = {
+  number: 23,
+  verses: [
+    { number: 1, text: "O Senhor é o meu pastor; nada me faltará." },
+    { number: 2, text: "Deitar-me faz em verdes pastos, guia-me mansamente a águas tranquilas." },
+    { number: 3, text: "Refrigera a minha alma; guia-me pelas veredas da justiça por amor do seu nome." },
+    { number: 4, text: "Ainda que eu andasse pelo vale da sombra da morte, não temeria mal algum, porque tu estás comigo; a tua vara e o teu cajado me consolam." },
+    { number: 5, text: "Preparas uma mesa perante mim na presença dos meus inimigos, unges a minha cabeça com óleo, o meu cálice transborda." },
+    { number: 6, text: "Certamente que a bondade e a misericórdia me seguirão todos os dias da minha vida; e habitarei na casa do Senhor por longos dias." }
+  ]
+}
+
+export const PSALMS_23_EN: LocalBibleChapter = {
+  number: 23,
+  verses: [
+    { number: 1, text: "The Lord is my shepherd; I shall not want." },
+    { number: 2, text: "He maketh me to lie down in green pastures: he leadeth me beside the still waters." },
+    { number: 3, text: "He restoreth my soul: he leadeth me in the paths of righteousness for his name's sake." },
+    { number: 4, text: "Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me." },
+    { number: 5, text: "Thou preparest a table before me in the presence of mine enemies: thou anointest my head with oil; my cup runneth over." },
+    { number: 6, text: "Surely goodness and mercy shall follow me all the days of my life: and I will dwell in the house of the Lord for ever." }
+  ]
+}
+
+export const PSALMS_23_ES: LocalBibleChapter = {
+  number: 23,
+  verses: [
+    { number: 1, text: "Jehová es mi pastor; nada me faltará." },
+    { number: 2, text: "En lugares de delicados pastos me hará descansar; junto a aguas de reposo me pastoreará." },
+    { number: 3, text: "Confortará mi alma; me guiará por sendas de justicia por amor de su nombre." },
+    { number: 4, text: "Aunque ande en valle de sombra de muerte, no temeré mal alguno, porque tú estarás conmigo; tu vara y tu cayado me infundirán aliento." },
+    { number: 5, text: "Aderezas mesa delante de mí en presencia de mis angustiadores; unges mi cabeza con aceite; mi copa está rebosando." },
+    { number: 6, text: "Ciertamente el bien y la misericordia me seguirán todos los días de mi vida, y en la casa de Jehová moraré por largos días." }
+  ]
+}
+
+// Mateus 5:3-12 - As Bem-aventuranças
+export const MATTHEW_5_PT: LocalBibleChapter = {
+  number: 5,
+  verses: [
+    { number: 3, text: "Bem-aventurados os pobres de espírito, porque deles é o reino dos céus." },
+    { number: 4, text: "Bem-aventurados os que choram, porque eles serão consolados." },
+    { number: 5, text: "Bem-aventurados os mansos, porque eles herdarão a terra." },
+    { number: 6, text: "Bem-aventurados os que têm fome e sede de justiça, porque eles serão fartos." },
+    { number: 7, text: "Bem-aventurados os misericordiosos, porque eles alcançarão misericórdia." },
+    { number: 8, text: "Bem-aventurados os puros de coração, porque eles verão a Deus." },
+    { number: 9, text: "Bem-aventurados os pacificadores, porque eles serão chamados filhos de Deus." },
+    { number: 10, text: "Bem-aventurados os perseguidos por causa da justiça, porque deles é o reino dos céus." },
+    { number: 11, text: "Bem-aventurados sois vós, quando vos injuriarem e perseguirem e, mentindo, disserem todo mal contra vós por minha causa." },
+    { number: 12, text: "Regozijai-vos e exultai, porque é grande o vosso galardão nos céus; porque assim perseguiram os profetas que foram antes de vós." }
+  ]
+}
+
+export const MATTHEW_5_EN: LocalBibleChapter = {
+  number: 5,
+  verses: [
+    { number: 3, text: "Blessed are the poor in spirit: for theirs is the kingdom of heaven." },
+    { number: 4, text: "Blessed are they that mourn: for they shall be comforted." },
+    { number: 5, text: "Blessed are the meek: for they shall inherit the earth." },
+    { number: 6, text: "Blessed are they which do hunger and thirst after righteousness: for they shall be filled." },
+    { number: 7, text: "Blessed are the merciful: for they shall obtain mercy." },
+    { number: 8, text: "Blessed are the pure in heart: for they shall see God." },
+    { number: 9, text: "Blessed are the peacemakers: for they shall be called the children of God." },
+    { number: 10, text: "Blessed are they which are persecuted for righteousness' sake: for theirs is the kingdom of heaven." },
+    { number: 11, text: "Blessed are ye, when men shall revile you, and persecute you, and shall say all manner of evil against you falsely, for my sake." },
+    { number: 12, text: "Rejoice, and be exceeding glad: for great is your reward in heaven: for so persecuted they the prophets which were before you." }
+  ]
+}
+
+export const MATTHEW_5_ES: LocalBibleChapter = {
+  number: 5,
+  verses: [
+    { number: 3, text: "Bienaventurados los pobres en espíritu, porque de ellos es el reino de los cielos." },
+    { number: 4, text: "Bienaventurados los que lloran, porque ellos recibirán consolación." },
+    { number: 5, text: "Bienaventurados los mansos, porque ellos recibirán la tierra por heredad." },
+    { number: 6, text: "Bienaventurados los que tienen hambre y sed de justicia, porque ellos serán saciados." },
+    { number: 7, text: "Bienaventurados los misericordiosos, porque ellos alcanzarán misericordia." },
+    { number: 8, text: "Bienaventurados los de limpio corazón, porque ellos verán a Dios." },
+    { number: 9, text: "Bienaventurados los pacificadores, porque ellos serán llamados hijos de Dios." },
+    { number: 10, text: "Bienaventurados los que padecen persecución por causa de la justicia, porque de ellos es el reino de los cielos." },
+    { number: 11, text: "Bienaventurados sois cuando por mi causa os vituperen y os persigan, y digan toda clase de mal contra vosotros, mintiendo." },
+    { number: 12, text: "Gozaos y alegraos, porque vuestro galardón es grande en los cielos; porque así persiguieron a los profetas que fueron antes de vosotros." }
+  ]
+}
+
 // Mapeamento de livros e capítulos disponíveis localmente por idioma
 export const LOCAL_BIBLE_DATA: Record<string, Record<string, Record<number, LocalBibleChapter>>> = {
   'pt-BR': {
     'genesis': {
       1: GENESIS_1_PT
+    },
+    'john': {
+      3: JOHN_3_16_PT
+    },
+    'psalms': {
+      23: PSALMS_23_PT
+    },
+    'matthew': {
+      5: MATTHEW_5_PT
     }
   },
   'en-US': {
     'genesis': {
       1: GENESIS_1_EN
+    },
+    'john': {
+      3: JOHN_3_16_EN
+    },
+    'psalms': {
+      23: PSALMS_23_EN
+    },
+    'matthew': {
+      5: MATTHEW_5_EN
     }
   },
   'es-ES': {
     'genesis': {
       1: GENESIS_1_ES
+    },
+    'john': {
+      3: JOHN_3_16_ES
+    },
+    'psalms': {
+      23: PSALMS_23_ES
+    },
+    'matthew': {
+      5: MATTHEW_5_ES
     }
   }
 }
