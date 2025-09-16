@@ -7,6 +7,7 @@ import { LoadingSpinner } from '../components/LoadingSpinner'
 import { ErrorState } from '../components/ErrorState'
 import { useTranslation } from 'react-i18next'
 import { Favorite } from '../types/bible'
+import { databaseService } from '../services/database'
 
 export function Chapter() {
   const { t, i18n } = useTranslation()
@@ -80,7 +81,7 @@ export function Chapter() {
     }
   }
 
-  const handleToggleVerseFavorite = (verse: any) => {
+  const handleToggleVerseFavorite = async (verse: any) => {
     console.log('handleToggleVerseFavorite called with:', { verse, bookId, chapterNumber, book })
     if (!bookId || !chapterNumber || !book) {
       console.log('Missing required data:', { bookId, chapterNumber, book })
@@ -92,53 +93,52 @@ export function Chapter() {
     const existingFavorite = favorites.find(fav => fav.id === verseId)
     console.log('Existing favorite found:', existingFavorite)
 
-    let updatedFavorites: Favorite[]
+    try {
+      let updatedFavorites: Favorite[]
 
-    if (existingFavorite) {
-      // Remove from favorites
-      updatedFavorites = favorites.filter(fav => fav.id !== verseId)
-    } else {
-      // Add to favorites
-      const newFavorite: Favorite = {
-        id: verseId,
-        bookId: bookId,
-        chapter: parseInt(chapterNumber),
-        verse: verse.number,
-        text: verse.text,
-        addedAt: new Date()
+      if (existingFavorite) {
+        // Remove from favorites
+        await databaseService.removeFavorite(verseId)
+        updatedFavorites = favorites.filter(fav => fav.id !== verseId)
+        console.log('Favorite removed from database:', verseId)
+      } else {
+        // Add to favorites
+        const newFavorite: Favorite = {
+          id: verseId,
+          bookId: bookId,
+          chapter: parseInt(chapterNumber),
+          verse: verse.number,
+          text: verse.text,
+          addedAt: new Date()
+        }
+        await databaseService.saveFavorite(newFavorite)
+        updatedFavorites = [...favorites, newFavorite]
+        console.log('Favorite saved to database:', verseId)
       }
-      updatedFavorites = [...favorites, newFavorite]
-    }
 
-    setFavorites(updatedFavorites)
-    console.log('Updated favorites state:', updatedFavorites)
-    
-    // Convert dates to strings for localStorage
-    const favoritesForStorage = updatedFavorites.map(fav => ({
-      ...fav,
-      addedAt: fav.addedAt.toISOString()
-    }))
-    console.log('Favorites for storage:', favoritesForStorage)
-    
-    const storageString = JSON.stringify(favoritesForStorage)
-    console.log('Storage string:', storageString)
-    
-    localStorage.setItem('bible-favorites', storageString)
-    console.log('Saved to localStorage, verifying...')
-    
-    // Verify what was actually saved
-    const saved = localStorage.getItem('bible-favorites')
-    console.log('Verification - what was saved:', saved)
-    
-    console.log('Favorito salvo:', existingFavorite ? 'removido' : 'adicionado', verseId)
-    console.log('Total de favoritos agora:', updatedFavorites.length)
-    
-    // Dispatch custom event to notify other components
-    const event = new CustomEvent('favoritesUpdated', { 
-      detail: { favorites: updatedFavorites } 
-    })
-    console.log('Dispatching favoritesUpdated event:', event)
-    window.dispatchEvent(event)
+      setFavorites(updatedFavorites)
+      console.log('Updated favorites state:', updatedFavorites)
+      
+      // Manter sincronização com localStorage para compatibilidade
+      const favoritesForStorage = updatedFavorites.map(fav => ({
+        ...fav,
+        addedAt: fav.addedAt.toISOString()
+      }))
+      
+      localStorage.setItem('bible-favorites', JSON.stringify(favoritesForStorage))
+      
+      console.log('Favorito salvo:', existingFavorite ? 'removido' : 'adicionado', verseId)
+      console.log('Total de favoritos agora:', updatedFavorites.length)
+      
+      // Dispatch custom event to notify other components
+      const event = new CustomEvent('favoritesUpdated', { 
+        detail: { favorites: updatedFavorites } 
+      })
+      console.log('Dispatching favoritesUpdated event:', event)
+      window.dispatchEvent(event)
+    } catch (error) {
+      console.error('Erro ao salvar/remover favorito:', error)
+    }
   }
 
   const fontSizeClasses = {

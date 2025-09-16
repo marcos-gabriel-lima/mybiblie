@@ -1,0 +1,73 @@
+// Import Quasar styles
+@import 'quasar/src/css/index.sass';
+
+// Import icon libraries
+@import '@quasar/extras/material-icons/material-icons.css';
+
+// Custom app styles
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.bible-text {
+  line-height: 1.8;
+  font-family: 'Georgia', serif;
+  font-size: 16px;
+}
+
+.verse-number {
+  color: #666;
+  font-weight: bold;
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.verse-text {
+  margin-bottom: 12px;
+  text-align: justify;
+}
+
+.book-card {
+  transition: transform 0.2s ease;
+}
+
+.book-card:hover {
+  transform: translateY(-2px);
+}
+
+.favorite-button {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.book-card:hover .favorite-button {
+  opacity: 1;
+}
+
+// Responsive design
+@media (max-width: 600px) {
+  .app-container {
+    padding: 8px;
+  }
+  
+  .bible-text {
+    font-size: 14px;
+  }
+  
+  .verse-text {
+    margin-bottom: 8px;
+  }
+}
+
+// Dark theme support
+.body--dark {
+  .verse-number {
+    color: #aaa;
+  }
+  
+  .bible-text {
+    color: #e0e0e0;
+  }
+}

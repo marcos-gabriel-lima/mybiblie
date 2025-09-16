@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { BibleApiService, BOOK_NAME_MAPPING } from '../services/bibleApi'
+import { offlineSyncService } from '../services/offlineSync'
 import { Chapter, Verse, Book } from '../types/bible'
 import { useTranslation } from 'react-i18next'
 
@@ -39,7 +40,8 @@ export function useBibleApi(): UseBibleApiReturn {
         throw new Error(`Livro não encontrado: ${bookId}`)
       }
 
-      const chapterData = await BibleApiService.getChapter(bookName, chapterNumber, currentLanguage)
+      // Usar o sistema offline que busca primeiro localmente, depois online
+      const chapterData = await offlineSyncService.getChapter(bookName, chapterNumber, currentLanguage)
       
       if (chapterData) {
         setChapter(chapterData)
@@ -185,5 +187,96 @@ export function useBibleSearch(): UseBibleSearchReturn {
     search,
     clearResults,
     clearError
+  }
+}
+
+interface UseOfflineStatusReturn {
+  isOnline: boolean
+  lastSync: Date | null
+  pendingSync: boolean
+  syncInProgress: boolean
+  offlineStats: {
+    hasOfflineData: boolean
+    chaptersCount: number
+    favoritesCount: number
+    lastSync: Date | null
+  } | null
+  preloadPopularChapters: () => Promise<void>
+  clearOfflineData: () => Promise<void>
+  forceSync: () => Promise<void>
+}
+
+export function useOfflineStatus(): UseOfflineStatusReturn {
+  const [status, setStatus] = useState(offlineSyncService.getStatus())
+  const [offlineStats, setOfflineStats] = useState<{
+    hasOfflineData: boolean
+    chaptersCount: number
+    favoritesCount: number
+    lastSync: Date | null
+  } | null>(null)
+
+  useEffect(() => {
+    // Carregar estatísticas iniciais
+    const loadStats = async () => {
+      try {
+        const stats = await offlineSyncService.getOfflineStats()
+        setOfflineStats(stats)
+      } catch (error) {
+        console.error('Erro ao carregar estatísticas offline:', error)
+      }
+    }
+
+    loadStats()
+
+    // Adicionar listener para mudanças de status
+    const removeListener = offlineSyncService.addStatusListener((newStatus) => {
+      setStatus(newStatus)
+    })
+
+    return () => {
+      removeListener()
+    }
+  }, [])
+
+  const preloadPopularChapters = useCallback(async () => {
+    try {
+      await offlineSyncService.preloadPopularChapters()
+      // Recarregar estatísticas após pré-carregamento
+      const stats = await offlineSyncService.getOfflineStats()
+      setOfflineStats(stats)
+    } catch (error) {
+      console.error('Erro no pré-carregamento:', error)
+    }
+  }, [])
+
+  const clearOfflineData = useCallback(async () => {
+    try {
+      await offlineSyncService.clearOfflineData()
+      const stats = await offlineSyncService.getOfflineStats()
+      setOfflineStats(stats)
+    } catch (error) {
+      console.error('Erro ao limpar dados offline:', error)
+    }
+  }, [])
+
+  const forceSync = useCallback(async () => {
+    try {
+      await offlineSyncService.forceSync()
+      const stats = await offlineSyncService.getOfflineStats()
+      setOfflineStats(stats)
+    } catch (error) {
+      console.error('Erro na sincronização forçada:', error)
+    }
+  }, [])
+
+  return {
+    isOnline: status.isOnline,
+    lastSync: status.lastSync,
+    pendingSync: status.pendingSync,
+    syncInProgress: status.syncInProgress,
+    offlineStats,
+    preloadPopularChapters,
+    clearOfflineData,
+    forceSync
   }
 }

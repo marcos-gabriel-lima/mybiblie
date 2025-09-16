@@ -3,32 +3,54 @@ import { Link } from 'react-router-dom'
 import { Heart, Trash2, BookOpen } from 'lucide-react'
 import { Favorite } from '../types/bible'
 import { books } from '../data/bible'
+import { databaseService } from '../services/database'
 
 export function Favorites() {
   const [favorites, setFavorites] = useState<Favorite[]>([])
 
   useEffect(() => {
     // Load favorites from localStorage
-    const loadFavorites = () => {
-      const savedFavorites = localStorage.getItem('bible-favorites')
-      console.log('Raw localStorage data:', savedFavorites)
-      if (savedFavorites) {
-        try {
-          const parsed = JSON.parse(savedFavorites)
-          console.log('Parsed favorites:', parsed)
+    const loadFavorites = async () => {
+      try {
+        // Primeiro tentar carregar do banco de dados
+        const dbFavorites = await databaseService.getAllFavorites()
+        console.log('Favorites from database:', dbFavorites)
+        
+        if (dbFavorites.length > 0) {
           // Convert string dates back to Date objects
+          const favoritesWithDates = dbFavorites.map((fav: any) => ({
+            ...fav,
+            addedAt: new Date(fav.addedAt)
+          }))
+          setFavorites(favoritesWithDates)
+          return
+        }
+
+        // Fallback para localStorage se não houver dados no banco
+        const savedFavorites = localStorage.getItem('bible-favorites')
+        console.log('Fallback to localStorage:', savedFavorites)
+        
+        if (savedFavorites) {
+          const parsed = JSON.parse(savedFavorites)
           const favoritesWithDates = parsed.map((fav: any) => ({
             ...fav,
             addedAt: new Date(fav.addedAt)
           }))
-          console.log('Favorites with dates:', favoritesWithDates)
+          
+          // Migrar para o banco de dados
+          for (const fav of favoritesWithDates) {
+            await databaseService.saveFavorite(fav)
+          }
+          
           setFavorites(favoritesWithDates)
-        } catch (error) {
-          console.error('Erro ao carregar favoritos:', error)
+          console.log('Favorites migrated to database')
+        } else {
+          console.log('No favorites found')
           setFavorites([])
         }
-      } else {
-        console.log('No favorites found in localStorage')
+      } catch (error) {
+        console.error('Erro ao carregar favoritos:', error)
+        setFavorites([])
       }
     }
 
@@ -58,10 +80,27 @@ export function Favorites() {
     }
   }, [])
 
-  const removeFavorite = (id: string) => {
-    const updatedFavorites = favorites.filter(fav => fav.id !== id)
-    setFavorites(updatedFavorites)
-    localStorage.setItem('bible-favorites', JSON.stringify(updatedFavorites))
+  const removeFavorite = async (id: string) => {
+    try {
+      // Remover do banco de dados
+      await databaseService.removeFavorite(id)
+      
+      // Atualizar estado local
+      const updatedFavorites = favorites.filter(fav => fav.id !== id)
+      setFavorites(updatedFavorites)
+      
+      // Manter sincronização com localStorage para compatibilidade
+      const favoritesForStorage = updatedFavorites.map(fav => ({
+        ...fav,
+        addedAt: fav.addedAt.toISOString()
+      }))
+      
+      localStorage.setItem('bible-favorites', JSON.stringify(favoritesForStorage))
+      
+      console.log('Favorite removed from database:', id)
+    } catch (error) {
+      console.error('Erro ao remover favorito:', error)
+    }
   }
 
   const clearAllFavorites = () => {
