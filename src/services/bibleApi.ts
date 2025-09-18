@@ -1,6 +1,6 @@
 import { Book, Chapter, Verse } from '../types/bible'
 import { API_CONFIG, DEV_CONFIG } from '../config/api'
-import { getLocalBibleChapter, isLocalChapterAvailable, LOCAL_BIBLE_DATA } from '../data/bibleData'
+import { getLocalBibleChapter, LOCAL_BIBLE_DATA } from '../data/bibleData'
 
 // Cache para evitar requisições desnecessárias
 const cache = new Map<string, any>()
@@ -13,22 +13,22 @@ const TRANSLATION_MAPPING: Record<string, string> = {
 }
 
 // Função para traduzir texto usando API gratuita
-async function translateText(text: string, targetLanguage: string): Promise<string> {
-  try {
-    // Usando MyMemory API (gratuita e sem necessidade de chave)
-    const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|${targetLanguage}`)
-    const data = await response.json()
-    
-    if (data.responseStatus === 200 && data.responseData) {
-      return data.responseData.translatedText
-    }
-    
-    return text // Retorna texto original se tradução falhar
-  } catch (error) {
-    console.warn('Erro na tradução:', error)
-    return text // Retorna texto original se tradução falhar
-  }
-}
+// async function translateText(text: string, targetLanguage: string): Promise<string> {
+//   try {
+//     // Usando MyMemory API (gratuita e sem necessidade de chave)
+//     const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|${targetLanguage}`)
+//     const data = await response.json()
+//     
+//     if (data.responseStatus === 200 && data.responseData) {
+//       return data.responseData.translatedText
+//     }
+//     
+//     return text // Retorna texto original se tradução falhar
+//   } catch (error) {
+//     console.warn('Erro na tradução:', error)
+//     return text // Retorna texto original se tradução falhar
+//   }
+// }
 
 export interface BibleApiResponse {
   reference: string
@@ -173,7 +173,7 @@ export class BibleApiService {
    */
   static async getVerses(bookName: string, chapterNumber: number, startVerse: number, endVerse: number): Promise<Verse[]> {
     try {
-      const response = await fetch(`${BIBLE_API_BASE}/${bookName}+${chapterNumber}:${startVerse}-${endVerse}`)
+      const response = await fetch(`${API_CONFIG.BIBLE_API_BASE}/${bookName}+${chapterNumber}:${startVerse}-${endVerse}`)
       
       if (!response.ok) {
         throw new Error(`Erro ao buscar versículos: ${response.status}`)

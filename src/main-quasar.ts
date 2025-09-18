@@ -10,17 +10,17 @@ import 'quasar/src/css/index.sass'
 
 // Import your components
 import App from './App.vue'
-import routes from './router/routes'
+// import routes from './router/routes'
 
 // Import i18n
-import { i18n } from './i18n'
+// import i18n from './i18n'
 
 // Import boot files
-import boot from './boot'
+// import boot from './boot'
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes: []
 })
 
 const app = createApp(App)
@@ -30,11 +30,11 @@ app.use(Quasar, {
 })
 
 app.use(router)
-app.use(i18n)
+// app.use(i18n)
 
 // Import and register boot files
-boot.forEach(bootFile => {
-  bootFile.default({ app, router })
-})
+// boot.forEach((bootFile: any) => {
+//   bootFile.default({ app, router })
+// })
 
 app.mount('#app')

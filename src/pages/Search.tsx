@@ -1,7 +1,5 @@
 import { useState } from 'react'
-import { Search as SearchIcon, BookOpen, Loader2, AlertCircle } from 'lucide-react'
-import { books } from '../data/bible'
-import { SearchResult } from '../types/bible'
+import { Search as SearchIcon, Loader2, AlertCircle } from 'lucide-react'
 import { useBibleSearch } from '../hooks/useBibleApi'
 
 export function Search() {

@@ -1,4 +1,4 @@
-import { Chapter, Book, Verse } from '../types/bible'
+import { Chapter, Verse } from '../types/bible'
 
 // Configuração do banco de dados
 const DB_NAME = 'BibleAppDB'
@@ -284,8 +284,8 @@ class DatabaseService {
     return new Promise((resolve, reject) => {
       const transaction = this.db!.transaction([STORES.CHAPTERS, STORES.FAVORITES], 'readwrite')
       
-      const clearChapterStore = transaction.objectStore(STORES.CHAPTERS).clear()
-      const clearFavoriteStore = transaction.objectStore(STORES.FAVORITES).clear()
+      // const clearChapterStore = transaction.objectStore(STORES.CHAPTERS).clear()
+      // const clearFavoriteStore = transaction.objectStore(STORES.FAVORITES).clear()
 
       transaction.oncomplete = () => {
         console.log('Banco de dados limpo')

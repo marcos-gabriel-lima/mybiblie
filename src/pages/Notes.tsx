@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
-import { StickyNote, Plus, Edit3, Trash2, BookOpen } from 'lucide-react'
+import { StickyNote, Plus, Edit3, Trash2 } from 'lucide-react'
 import { Note } from '../types/bible'
 import { books } from '../data/bible'
 
 export function Notes() {
   const [notes, setNotes] = useState<Note[]>([])
-  const [editingNote, setEditingNote] = useState<Note | null>(null)
+  // const [editingNote, setEditingNote] = useState<Note | null>(null)
   const [showAddForm, setShowAddForm] = useState(false)
 
   useEffect(() => {
@@ -37,15 +37,15 @@ export function Notes() {
     setShowAddForm(false)
   }
 
-  const updateNote = (id: string, updatedNote: Partial<Note>) => {
-    const updatedNotes = notes.map(note => 
-      note.id === id 
-        ? { ...note, ...updatedNote, updatedAt: new Date() }
-        : note
-    )
-    saveNotes(updatedNotes)
-    setEditingNote(null)
-  }
+  // const updateNote = (id: string, updatedNote: Partial<Note>) => {
+  //   const updatedNotes = notes.map(note => 
+  //     note.id === id 
+  //       ? { ...note, ...updatedNote, updatedAt: new Date() }
+  //       : note
+  //   )
+  //   saveNotes(updatedNotes)
+  //   setEditingNote(null)
+  // }
 
   const deleteNote = (id: string) => {
     if (confirm('Tem certeza que deseja excluir esta nota?')) {
@@ -214,7 +214,7 @@ export function Notes() {
                   </div>
                   <div className="flex items-center space-x-2 ml-4">
                     <button
-                      onClick={() => setEditingNote(note)}
+                      onClick={() => {/* setEditingNote(note) */}}
                       className="p-2 text-gray-400 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors"
                       title="Editar nota"
                     >
