@@ -1,3 +1,4 @@
+
 # 🌍 Internacionalização (i18n) - Bíblia App
 
 ## 🚀 Visão Geral

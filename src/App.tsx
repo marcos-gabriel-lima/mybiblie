@@ -6,6 +6,7 @@ import { Chapter } from './pages/Chapter'
 import { Search } from './pages/Search'
 import { Favorites } from './pages/Favorites'
 import { Notes } from './pages/Notes'
+import { Settings } from './pages/Settings'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/search" element={<Search />} />
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/notes" element={<Notes />} />
+            <Route path="/settings" element={<Settings />} />
           </Routes>
         </main>
       </div>

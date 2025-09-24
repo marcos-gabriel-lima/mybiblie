@@ -2,10 +2,26 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-    <title>Bíblia App</title>
-    <meta name="description" content="Leia a Bíblia Sagrada online com uma interface moderna e intuitiva" />
+    <link rel="icon" type="image/png" href="/icons/icon-192x192.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>Bíblia App - Sua Bíblia Digital</title>
+    <meta name="description" content="Leia a Bíblia Sagrada online e offline com uma interface moderna e intuitiva. Suporte multilíngue (Português, Inglês, Espanhol) e funcionalidades PWA completas." />
+    <meta name="keywords" content="bíblia, biblia, sagrada, cristão, cristianismo, religião, offline, pwa, app" />
+    <meta name="author" content="Marco Gabriel Lima" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://biblia-app.vercel.app/" />
+    <meta property="og:title" content="Bíblia App - Sua Bíblia Digital" />
+    <meta property="og:description" content="Leia a Bíblia Sagrada online e offline com uma interface moderna e intuitiva." />
+    <meta property="og:image" content="/icons/icon-512x512.png" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://biblia-app.vercel.app/" />
+    <meta property="twitter:title" content="Bíblia App - Sua Bíblia Digital" />
+    <meta property="twitter:description" content="Leia a Bíblia Sagrada online e offline com uma interface moderna e intuitiva." />
+    <meta property="twitter:image" content="/icons/icon-512x512.png" />
     
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#2563eb" />
@@ -15,17 +31,57 @@
     <meta name="apple-mobile-web-app-title" content="Bíblia App" />
     <meta name="msapplication-TileColor" content="#2563eb" />
     <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
     
     <!-- Manifest -->
     <link rel="manifest" href="/manifest.json" />
     
     <!-- Apple Touch Icons -->
-    <link rel="apple-touch-icon" href="/icons/icon-192x192.svg" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png" />
+    <link rel="apple-touch-icon" sizes="128x128" href="/icons/icon-128x128.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png" />
+    <link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png" />
+    
+    <!-- Standard Icons -->
+    <link rel="icon" type="image/png" sizes="72x72" href="/icons/icon-72x72.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/icons/icon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="128x128" href="/icons/icon-128x128.png" />
+    <link rel="icon" type="image/png" sizes="144x144" href="/icons/icon-144x144.png" />
+    <link rel="icon" type="image/png" sizes="152x152" href="/icons/icon-152x152.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="384x384" href="/icons/icon-384x384.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512x512.png" />
+    
+    <!-- Microsoft Tiles -->
+    <meta name="msapplication-TileImage" content="/icons/icon-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="/icons/icon-72x72.png" />
+    <meta name="msapplication-square150x150logo" content="/icons/icon-144x144.png" />
+    <meta name="msapplication-wide310x150logo" content="/icons/icon-192x192.png" />
+    <meta name="msapplication-square310x310logo" content="/icons/icon-512x512.png" />
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/icons/icon-192x192.png" as="image" />
+    <link rel="preload" href="/manifest.json" as="fetch" crossorigin />
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    
+    <!-- Performance -->
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="date=no" />
+    <meta name="format-detection" content="address=no" />
+    <meta name="format-detection" content="email=no" />
   </head>
   <body>
     <div id="root"></div>
@@ -37,28 +93,54 @@
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/sw.js')
             .then((registration) => {
-              console.log('SW registered: ', registration);
+              console.log('🚀 Service Worker registrado com sucesso:', registration);
               
               // Verificar se há uma nova versão disponível
               registration.addEventListener('updatefound', () => {
                 const newWorker = registration.installing;
-                newWorker.addEventListener('statechange', () => {
-                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                    // Nova versão disponível, recarregar a página
-                    console.log('Nova versão do Service Worker disponível, recarregando...');
-                    window.location.reload();
-                  }
-                });
+                if (newWorker) {
+                  newWorker.addEventListener('statechange', () => {
+                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                      // Nova versão disponível
+                      console.log('🔄 Nova versão do Service Worker disponível!');
+                      
+                      // Mostrar notificação para o usuário
+                      if (confirm('Nova versão do app disponível! Deseja atualizar agora?')) {
+                        newWorker.postMessage({ type: 'SKIP_WAITING' });
+                        window.location.reload();
+                      }
+                    }
+                  });
+                }
               });
+              
+              // Verificar atualizações periodicamente
+              setInterval(() => {
+                registration.update();
+              }, 60000); // A cada minuto
             })
             .catch((registrationError) => {
-              console.log('SW registration failed: ', registrationError);
+              console.error('❌ Falha no registro do Service Worker:', registrationError);
             });
         });
+        
+        // Escutar mudanças no Service Worker
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          console.log('🔄 Service Worker controller mudou');
+          window.location.reload();
+        });
+        
+        // Escutar mensagens do Service Worker
+        navigator.serviceWorker.addEventListener('message', (event) => {
+          console.log('📨 Mensagem do Service Worker:', event.data);
+        });
+      } else {
+        console.warn('⚠️ Service Worker não suportado neste navegador');
       }
     </script>
   </body>
 </html>
+
 
 
 

@@ -1,8 +1,9 @@
 import { Link, useLocation } from 'react-router-dom'
-import { BookOpen, Search, Heart, StickyNote, Menu } from 'lucide-react'
+import { BookOpen, Search, Heart, StickyNote, Menu, Settings } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LanguageSelector } from './LanguageSelector'
+import { OfflineIndicator } from './OfflineStatus'
 
 export function Header() {
   const location = useLocation()
@@ -15,6 +16,7 @@ export function Header() {
     { name: t('navigation.search'), href: '/search', icon: Search },
     { name: t('navigation.favorites'), href: '/favorites', icon: Heart },
     { name: t('navigation.notes'), href: '/notes', icon: StickyNote },
+    { name: 'Configurações', href: '/settings', icon: Settings },
   ]
 
   return (
@@ -53,6 +55,9 @@ export function Header() {
             
             {/* Language Selector */}
             <LanguageSelector />
+            
+            {/* Offline Indicator */}
+            <OfflineIndicator />
           </nav>
 
           {/* Mobile menu button */}

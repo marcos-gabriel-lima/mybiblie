@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Bíblia App</string>
-    <string name="title_activity_main">Bíblia App</string>
+    <string name="app_name">Biblia App</string>
+    <string name="title_activity_main">Biblia App</string>
     <string name="package_name">com.marcosgabriel.biblia</string>
     <string name="custom_url_scheme">com.marcosgabriel.biblia</string>
 </resources>
