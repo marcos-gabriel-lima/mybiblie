@@ -1,102 +1,154 @@
-# 📖 Bíblia App
+# 📖 Bíblia App PWA
 
-Uma aplicação moderna para leitura da Bíblia Sagrada desenvolvida em React com suporte multilíngue.
+[![PWA](https://img.shields.io/badge/PWA-Enabled-blue.svg)](https://web.dev/progressive-web-apps/)
+[![React](https://img.shields.io/badge/React-18+-61DAFB.svg)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5+-3178C6.svg)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-5+-646CFF.svg)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3+-06B6D4.svg)](https://tailwindcss.com/)
+
+> **Aplicativo de leitura bíblica moderno com funcionalidades PWA completas, suporte multilíngue e funcionamento offline.**
+
+🌐 **Live Demo**: [mybiblie.vercel.app](https://mybiblie.vercel.app)
 
 ## ✨ Funcionalidades
 
-- 📚 **Leitura da Bíblia**: Interface moderna e intuitiva para leitura dos textos sagrados
-- 🌍 **Multilíngue**: Suporte para Português (ACF), Inglês (KJV) e Espanhol (RVR1960)
-- 📱 **Responsivo**: Funciona perfeitamente em desktop, tablet e mobile
-- 🔍 **Busca**: Sistema de busca por versículos e palavras-chave
-- ❤️ **Favoritos**: Marque seus versículos favoritos
-- 📤 **Compartilhamento**: Compartilhe versículos facilmente
-- 🎨 **Personalização**: Ajuste o tamanho da fonte conforme sua preferência
+### 📱 **PWA Completa**
+- ✅ **Instalação como app nativo** (sem app store)
+- ✅ **Funcionamento offline** com cache inteligente
+- ✅ **Service Worker avançado** com pré-carregamento
+- ✅ **Atualizações automáticas** em background
+- ✅ **Shortcuts** para todas as funcionalidades
+- ✅ **Cache de conteúdo bíblico** para uso offline
 
-## 🚀 Tecnologias Utilizadas
+### 🌐 **Multilíngue**
+- 🇧🇷 **Português** (ACF - Almeida Corrigida Fiel)
+- 🇺🇸 **English** (KJV - King James Version)
+- 🇪🇸 **Español** (RVR1960 - Reina-Valera 1960)
 
-- **React 18** - Framework principal
-- **TypeScript** - Tipagem estática
-- **Vite** - Build tool e dev server
-- **Tailwind CSS** - Estilização
-- **React Router** - Navegação
-- **i18next** - Internacionalização
-- **Lucide React** - Ícones
+### 📖 **Funcionalidades Bíblicas**
+- 📚 **Leitura completa** da Bíblia
+- 🔍 **Busca avançada** de versículos
+- ❤️ **Sistema de favoritos**
+- 📝 **Notas pessoais**
+- 📖 **Navegação por livros e capítulos**
 
-## 📦 Instalação
+### ⚙️ **Configurações Avançadas**
+- 🎨 **Temas** (claro/escuro)
+- 🔤 **Tamanhos de fonte** ajustáveis
+- 💾 **Gerenciamento de cache**
+- 📊 **Estatísticas offline**
+- 🔄 **Sincronização automática**
 
-1. Clone o repositório:
+## 🚀 **Instalação e Uso**
+
+### **1. Instalação Local**
 ```bash
+# Clonar repositório
 git clone https://github.com/marcos-gabriel-lima/mybiblie.git
 cd mybiblie
-```
 
-2. Instale as dependências:
-```bash
+# Instalar dependências
 npm install
-```
 
-3. Execute o projeto:
-```bash
+# Executar em desenvolvimento
 npm run dev
+
+# Build de produção
+npm run build
+
+# Preview do build
+npm run preview
 ```
 
-4. Acesse no navegador: `http://localhost:3000`
+### **2. Deploy Online**
+```bash
+# Deploy automático
+./deploy.sh
 
-## 🛠️ Scripts Disponíveis
+# Ou deploy manual
+npm run build
+npx vercel --prod
+```
 
-- `npm run dev` - Inicia o servidor de desenvolvimento
-- `npm run build` - Cria build de produção
-- `npm run preview` - Visualiza o build de produção
-- `npm run lint` - Executa o linter
+### **3. Instalar como App**
+1. **Acesse** [mybiblie.vercel.app](https://mybiblie.vercel.app)
+2. **Clique** no ícone de instalação (📱)
+3. **Confirme** a instalação
+4. **Use** como app nativo!
 
-## 📖 Como Usar
+## 🛠️ **Tecnologias**
 
-1. **Navegação**: Use o menu para navegar entre os livros da Bíblia
-2. **Capítulos**: Clique em um livro para ver seus capítulos
-3. **Leitura**: Navegue pelos versículos usando os botões de navegação
-4. **Idiomas**: Use o seletor de idioma (🌍) para alternar entre traduções
-5. **Favoritos**: Clique no coração para marcar versículos favoritos
-6. **Compartilhamento**: Use o botão de compartilhar para enviar versículos
+- **Frontend**: React 18+ + TypeScript
+- **Build**: Vite 5+ + Tailwind CSS
+- **PWA**: Service Worker + Manifest
+- **i18n**: react-i18next
+- **API**: bible-api.com
+- **Deploy**: Vercel
 
-## 🌍 Idiomas Suportados
+## 📱 **Compatibilidade**
 
-- **🇧🇷 Português**: Almeida Corrigida Fiel (ACF)
-- **🇺🇸 English**: King James Version (KJV)
-- **🇪🇸 Español**: Reina-Valera 1960 (RVR1960)
+- ✅ **Desktop**: Chrome, Edge, Firefox, Safari
+- ✅ **Mobile**: Android Chrome, iOS Safari
+- ✅ **Tablet**: iPad Safari, Android Chrome
+- ✅ **PWA**: Instalação em todos os dispositivos
 
-## 📱 Responsividade
+## 🔧 **Scripts Disponíveis**
 
-O aplicativo é totalmente responsivo e funciona em:
-- 💻 Desktop (1200px+)
-- 📱 Tablet (768px - 1199px)
-- 📱 Mobile (até 767px)
+```bash
+npm run dev          # Desenvolvimento
+npm run build        # Build de produção
+npm run preview      # Preview do build
+npm run deploy       # Deploy para GitHub Pages
+```
 
-## 🤝 Contribuição
+## 📊 **Performance PWA**
 
-Contribuições são bem-vindas! Para contribuir:
+- 🚀 **First Contentful Paint**: < 2s
+- ⚡ **Largest Contentful Paint**: < 2.5s
+- 📱 **Cumulative Layout Shift**: < 0.1
+- 🎯 **Time to Interactive**: < 3.5s
+- 📈 **Lighthouse PWA Score**: > 90
 
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
+## 🧪 **Teste das Funcionalidades PWA**
 
-## 📄 Licença
+### **Teste de Instalação:**
+1. Acesse o app no navegador
+2. Procure o ícone de instalação
+3. Instale como app nativo
+4. Verifique se funciona offline
 
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+### **Teste Offline:**
+1. Instale o app
+2. Desconecte da internet
+3. Teste navegação e funcionalidades
+4. Verifique cache de conteúdo
 
-## 👨‍💻 Desenvolvedor
+## 🤝 **Contribuição**
+
+1. **Fork** o projeto
+2. **Crie** uma branch para sua feature
+3. **Commit** suas mudanças
+4. **Push** para a branch
+5. **Abra** um Pull Request
+
+## 📄 **Licença**
+
+Este projeto é de uso pessoal e sem fins lucrativos.
+
+## 👨‍💻 **Desenvolvedor**
 
 **Marco Gabriel Lima**
 - GitHub: [@marcos-gabriel-lima](https://github.com/marcos-gabriel-lima)
+- App: [mybiblie.vercel.app](https://mybiblie.vercel.app)
 
-## 🙏 Agradecimentos
+## 🙏 **Agradecimentos**
 
-- [Bible API](https://bible-api.com/) - API para textos bíblicos
-- [React](https://reactjs.org/) - Framework JavaScript
-- [Tailwind CSS](https://tailwindcss.com/) - Framework CSS
-- [Lucide](https://lucide.dev/) - Ícones
+- **bible-api.com** pela API gratuita
+- **Comunidade React** pelo ecossistema
+- **Deus** pela inspiração e sabedoria
 
 ---
 
-⭐ Se este projeto te ajudou, considere dar uma estrela no GitHub!
+**📖 Que a Palavra de Deus alcance muitas vidas através deste aplicativo!**
+
+**⭐ Se este projeto te abençoou, considere dar uma estrela!**
