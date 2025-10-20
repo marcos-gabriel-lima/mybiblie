@@ -1,8 +1,8 @@
 {
-  "name": "bible",
+  "name": "biblia-digital",
   "version": "0.0.1",
-  "description": "A Quasar Project",
-  "productName": "Quasar App",
+  "description": "Aplicação Digital da Bíblia",
+  "productName": "Bíblia Digital",
   "author": "Marcos Gabriel <marcosgabriellimacosta@gmail.com>",
   "type": "module",
   "private": true,

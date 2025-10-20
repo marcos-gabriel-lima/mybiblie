@@ -12,14 +12,16 @@
 // to match your app's branding.
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
 
-$primary: #1976d2;
-$secondary: #26a69a;
-$accent: #9c27b0;
+// Cores modernas e legíveis para a Bíblia Digital
+$primary: #1976d2;        // Azul moderno - confiança e espiritualidade
+$secondary: #26a69a;      // Verde água - crescimento e vida
+$accent: #9c27b0;        // Roxo - sabedoria e profundidade
 
-$dark: #1d1d1d;
-$dark-page: #121212;
+// Modo escuro melhorado
+$dark: #1a1a1a;           // Cinza escuro mais neutro
+$dark-page: #121212;      // Preto suave para fundo
 
-$positive: #21ba45;
-$negative: #c10015;
-$info: #31ccec;
-$warning: #f2c037;
+$positive: #21ba45;       // Verde - crescimento espiritual
+$negative: #c10015;        // Vermelho - alertas
+$info: #31ccec;           // Azul claro - informações
+$warning: #f2c037;        // Amarelo - avisos
