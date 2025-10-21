@@ -1,0 +1,5 @@
+{
+  "appId": "com.bibliadigital.app",
+  "appName": "Bíblia Digital",
+  "webDir": "dist/spa"
+}
