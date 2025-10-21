@@ -16,6 +16,9 @@
           <p class="text-grey-6 text-weight-medium">
             {{ currentVerse.reference }}
           </p>
+          <p class="text-caption text-grey-5">
+            {{ currentVerse.translation }}
+          </p>
         </div>
       </div>
       
@@ -41,51 +44,51 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { getVerse } from '../services/bibleApi.js'
-
-// Versículos inspiradores para o dia
-const dailyVerses = [
-  { reference: 'João 3:16' },
-  { reference: 'Provérbios 3:5' },
-  { reference: 'Jeremias 29:11' },
-  { reference: 'Filipenses 4:13' },
-  { reference: 'Salmos 23:1' },
-  { reference: 'Lucas 1:37' },
-  { reference: 'Romanos 8:28' }
-]
+import { getVersePortuguese } from '../services/bibleApi.js'
+import { getDailyVerse } from '../utils/bibleData.js'
 
 const currentVerse = ref({
   text: 'Carregando versículo do dia...',
-  reference: 'João 3:16'
+  reference: 'João 3:16',
+  translation: 'Almeida Revista e Corrigida'
 })
 
 const loading = ref(true)
 const error = ref(false)
 
-// Carregar versículo do dia da API
+// Carregar versículo do dia em português
 async function loadDailyVerse() {
   try {
     loading.value = true
     error.value = false
     
-    const today = new Date()
-    const dayOfWeek = today.getDay()
-    const verseIndex = dayOfWeek % dailyVerses.length
-    const selectedReference = dailyVerses[verseIndex].reference
+    // Primeiro, tenta obter da API em português
+    const dailyVerseData = getDailyVerse()
+    const apiData = await getVersePortuguese(dailyVerseData.reference, 'almeida')
     
-    const apiData = await getVerse(selectedReference)
-    
-    currentVerse.value = {
-      text: apiData.text,
-      reference: apiData.reference
+    if (apiData && apiData.verses && apiData.verses.length > 0) {
+      currentVerse.value = {
+        text: apiData.verses[0].text,
+        reference: apiData.reference,
+        translation: 'Almeida Revista e Corrigida'
+      }
+    } else {
+      // Fallback para dados locais
+      currentVerse.value = {
+        text: dailyVerseData.text,
+        reference: dailyVerseData.reference,
+        translation: dailyVerseData.translation
+      }
     }
   } catch (err) {
     console.error('Erro ao carregar versículo do dia:', err)
     error.value = true
     // Fallback para versículo local
+    const dailyVerseData = getDailyVerse()
     currentVerse.value = {
-      text: 'Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna.',
-      reference: 'João 3:16'
+      text: dailyVerseData.text,
+      reference: dailyVerseData.reference,
+      translation: dailyVerseData.translation
     }
   } finally {
     loading.value = false

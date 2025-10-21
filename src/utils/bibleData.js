@@ -71,35 +71,57 @@ export const BIBLE_BOOKS = [
   { name: 'Apocalipse', chapters: 22, icon: 'auto_stories', testament: 'new', abbreviation: 'Ap' }
 ]
 
-// Versículos inspiradores para o versículo do dia
+// Versículos inspiradores para o versículo do dia (em português)
 export const DAILY_VERSES = [
   {
     text: "Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna.",
-    reference: "João 3:16"
+    reference: "João 3:16",
+    translation: "Almeida Revista e Corrigida"
   },
   {
     text: "Confia no Senhor de todo o teu coração, e não te estribes no teu próprio entendimento.",
-    reference: "Provérbios 3:5"
+    reference: "Provérbios 3:5",
+    translation: "Almeida Revista e Corrigida"
   },
   {
     text: "Porque eu bem sei os pensamentos que tenho a vosso respeito, diz o Senhor; pensamentos de paz, e não de mal, para vos dar o fim que esperais.",
-    reference: "Jeremias 29:11"
+    reference: "Jeremias 29:11",
+    translation: "Almeida Revista e Corrigida"
   },
   {
     text: "Tudo posso naquele que me fortalece.",
-    reference: "Filipenses 4:13"
+    reference: "Filipenses 4:13",
+    translation: "Almeida Revista e Corrigida"
   },
   {
     text: "O Senhor é o meu pastor; nada me faltará.",
-    reference: "Salmos 23:1"
+    reference: "Salmos 23:1",
+    translation: "Almeida Revista e Corrigida"
   },
   {
     text: "Porque para Deus nada é impossível.",
-    reference: "Lucas 1:37"
+    reference: "Lucas 1:37",
+    translation: "Almeida Revista e Corrigida"
   },
   {
     text: "E sabemos que todas as coisas contribuem juntamente para o bem daqueles que amam a Deus.",
-    reference: "Romanos 8:28"
+    reference: "Romanos 8:28",
+    translation: "Almeida Revista e Corrigida"
+  },
+  {
+    text: "No princípio criou Deus os céus e a terra.",
+    reference: "Gênesis 1:1",
+    translation: "Almeida Revista e Corrigida"
+  },
+  {
+    text: "Portanto ide, fazei discípulos de todas as nações, batizando-os em nome do Pai, e do Filho, e do Espírito Santo.",
+    reference: "Mateus 28:19",
+    translation: "Almeida Revista e Corrigida"
+  },
+  {
+    text: "O amor é sofredor, é benigno; o amor não é invejoso; o amor não trata com leviandade, não se ensoberbece.",
+    reference: "1 Coríntios 13:4",
+    translation: "Almeida Revista e Corrigida"
   }
 ]
 
@@ -124,7 +146,7 @@ export function getDailyVerse() {
 }
 
 export function generateSampleVerses(chapter) {
-  // Versículos de exemplo - em uma aplicação real, estes viriam de uma API
+  // Versículos de exemplo em português - em uma aplicação real, estes viriam de uma API
   const sampleVerses = {
     1: [
       { number: 1, text: "No princípio criou Deus os céus e a terra." },
@@ -141,6 +163,6 @@ export function generateSampleVerses(chapter) {
   }
   
   return sampleVerses[chapter] || [
-    { number: 1, text: `Versículo de exemplo do capítulo ${chapter}. Em uma aplicação real, este texto viria de uma API ou banco de dados com o texto completo da Bíblia.` }
+    { number: 1, text: `Versículo de exemplo do capítulo ${chapter}. Em uma aplicação real, este texto viria de uma API ou banco de dados com o texto completo da Bíblia em português.` }
   ]
 }

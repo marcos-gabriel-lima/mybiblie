@@ -148,6 +148,11 @@
       </div>
     </div>
 
+    <!-- Translation Selector -->
+    <div class="translation-section q-mb-lg">
+      <TranslationSelector @translation-changed="onTranslationChanged" />
+    </div>
+
     <!-- Daily Verse Section -->
     <div class="daily-verse-section q-mt-xl">
       <DailyVerse />
@@ -158,6 +163,7 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import DailyVerse from 'components/DailyVerse.vue'
+import TranslationSelector from 'components/TranslationSelector.vue'
 
 const router = useRouter()
 
@@ -169,6 +175,12 @@ function startReading() {
 function navigateToBook(bookName) {
   const slug = bookName.toLowerCase().replace(/\s+/g, '-')
   router.push(`/book/${slug}`)
+}
+
+function onTranslationChanged(translationCode) {
+  console.log('Tradução alterada para:', translationCode)
+  // Aqui você pode implementar lógica adicional quando a tradução mudar
+  // Por exemplo, recarregar dados, atualizar cache, etc.
 }
 </script>
 

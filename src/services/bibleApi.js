@@ -1,6 +1,15 @@
 // Serviço para integração com Bible API
 const BIBLE_API_BASE_URL = 'https://bible-api.com'
 
+// Importar dados locais em português
+import { getLocalPortugueseVerse, searchPortugueseVerses } from '../data/portugueseBible.js'
+
+// APIs alternativas para português (para implementação futura)
+// const PORTUGUESE_APIS = {
+//   alternative: 'https://api.bible.com/v1/bibles',
+//   local: '/api/bible'
+// }
+
 // Função para buscar um versículo específico
 export async function getVerse(reference) {
   try {
@@ -147,4 +156,135 @@ export function processVerses(apiData) {
     number: verse.verse,
     text: verse.text
   }))
+}
+
+// Função para buscar versículo em português (com fallback para inglês)
+export async function getVersePortuguese(reference, translation = 'almeida') {
+  try {
+    // Primeiro, tenta buscar em português usando diferentes estratégias
+    let portugueseData = await tryPortugueseSources(reference, translation)
+    
+    if (portugueseData) {
+      return portugueseData
+    }
+    
+    // Fallback para inglês se não encontrar em português
+    console.warn(`Não foi possível encontrar ${reference} em português, usando versão em inglês`)
+    return await getVerse(reference)
+  } catch (error) {
+    console.error('Erro ao buscar versículo em português:', error)
+    // Fallback para inglês em caso de erro
+    return await getVerse(reference)
+  }
+}
+
+// Função para tentar diferentes fontes em português
+async function tryPortugueseSources(reference, translation) {
+  // Estratégia 1: Tentar com parâmetros de idioma na API atual
+  try {
+    const response = await fetch(`${BIBLE_API_BASE_URL}/${reference}?translation=${translation}`)
+    if (response.ok) {
+      const data = await response.json()
+      if (data && data.verses && data.verses.length > 0) {
+        return data
+      }
+    }
+  } catch (error) {
+    console.log('Estratégia 1 falhou:', error.message)
+  }
+  
+  // Estratégia 2: Usar dados locais em português
+  try {
+    const localData = await getLocalPortugueseVerseData(reference)
+    if (localData) {
+      return localData
+    }
+  } catch (error) {
+    console.log('Estratégia 2 falhou:', error.message)
+  }
+  
+  return null
+}
+
+// Função para obter versículos em português de dados locais
+async function getLocalPortugueseVerseData(reference) {
+  // Usar os dados locais importados
+  return getLocalPortugueseVerse(reference)
+}
+
+// Função para buscar capítulo em português
+export async function getChapterPortuguese(book, chapter, translation = 'almeida') {
+  try {
+    const reference = `${book}+${chapter}`
+    return await getVersePortuguese(reference, translation)
+  } catch (error) {
+    console.error('Erro ao buscar capítulo em português:', error)
+    return await getChapter(book, chapter)
+  }
+}
+
+// Função para buscar livro em português
+export async function getBookPortuguese(book, translation = 'almeida') {
+  try {
+    return await getVersePortuguese(book, translation)
+  } catch (error) {
+    console.error('Erro ao buscar livro em português:', error)
+    return await getBook(book)
+  }
+}
+
+// Configurações de traduções disponíveis
+export const AVAILABLE_TRANSLATIONS = {
+  almeida: {
+    name: 'Almeida Revista e Corrigida',
+    code: 'ARC',
+    language: 'pt-BR',
+    description: 'Tradução clássica da Bíblia em português'
+  },
+  nvi: {
+    name: 'Nova Versão Internacional',
+    code: 'NVI',
+    language: 'pt-BR',
+    description: 'Tradução moderna e acessível'
+  },
+  ntlh: {
+    name: 'Nova Tradução na Linguagem de Hoje',
+    code: 'NTLH',
+    language: 'pt-BR',
+    description: 'Linguagem simples e atual'
+  },
+  english: {
+    name: 'King James Version',
+    code: 'KJV',
+    language: 'en-US',
+    description: 'English translation (fallback)'
+  }
+}
+
+// Função para obter configuração de tradução
+export function getTranslationConfig(translationCode) {
+  return AVAILABLE_TRANSLATIONS[translationCode] || AVAILABLE_TRANSLATIONS.almeida
+}
+
+// Função para buscar por texto em português
+export async function searchVersesPortuguese(query, translation = 'almeida') {
+  try {
+    // Primeiro, tenta buscar nos dados locais
+    const localResults = searchPortugueseVerses(query)
+    if (localResults && localResults.length > 0) {
+      return {
+        query: query,
+        results: localResults,
+        translation: translation,
+        source: 'local'
+      }
+    }
+    
+    // Fallback para busca em inglês
+    console.warn(`Não foi possível encontrar "${query}" em português, usando busca em inglês`)
+    return await searchVerses(query)
+  } catch (error) {
+    console.error('Erro ao buscar versículos em português:', error)
+    return await searchVerses(query)
+  }
 }

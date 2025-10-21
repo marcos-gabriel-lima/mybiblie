@@ -108,7 +108,7 @@ import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import ChapterNavigation from 'components/ChapterNavigation.vue'
 import { findBookByName, generateChapters } from '../utils/bibleData.js'
-import { getChapter, getBookApiName, processVerses } from '../services/bibleApi.js'
+import { getChapterPortuguese, getBookApiName, processVerses } from '../services/bibleApi.js'
 import { useQuasar } from 'quasar'
 
 const route = useRoute()
@@ -132,7 +132,7 @@ async function openChapter(chapter) {
   
   try {
     const apiBookName = getBookApiName(bookInfo.value.name)
-    const apiData = await getChapter(apiBookName, chapter)
+    const apiData = await getChapterPortuguese(apiBookName, chapter, 'almeida')
     verses.value = processVerses(apiData)
     chapterDialogOpen.value = true
   } catch (err) {

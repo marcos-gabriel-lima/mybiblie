@@ -35,9 +35,11 @@ export const APP_CONFIG = {
   // Configurações de leitura
   reading: {
     defaultTranslation: 'almeida',
+    defaultLanguage: 'pt-BR',
     enableNotes: true,
     enableBookmarks: true,
-    enableHighlights: true
+    enableHighlights: true,
+    availableTranslations: ['almeida', 'nvi', 'ntlh', 'english']
   },
   
   // Configurações de cache
