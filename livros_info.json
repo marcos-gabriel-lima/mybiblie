@@ -1,0 +1,466 @@
+{
+  "livros": [
+    {
+      "nome": "Gênesis",
+      "testamento": "Antigo",
+      "ordem": 1,
+      "n_capitulos": 50,
+      "n_versiculos": 1533
+    },
+    {
+      "nome": "Êxodo",
+      "testamento": "Antigo",
+      "ordem": 2,
+      "n_capitulos": 40,
+      "n_versiculos": 1213
+    },
+    {
+      "nome": "Levítico",
+      "testamento": "Antigo",
+      "ordem": 3,
+      "n_capitulos": 27,
+      "n_versiculos": 859
+    },
+    {
+      "nome": "Números",
+      "testamento": "Antigo",
+      "ordem": 4,
+      "n_capitulos": 36,
+      "n_versiculos": 1288
+    },
+    {
+      "nome": "Deuteronômio",
+      "testamento": "Antigo",
+      "ordem": 5,
+      "n_capitulos": 34,
+      "n_versiculos": 959
+    },
+    {
+      "nome": "Josué",
+      "testamento": "Antigo",
+      "ordem": 6,
+      "n_capitulos": 24,
+      "n_versiculos": 658
+    },
+    {
+      "nome": "Juízes",
+      "testamento": "Antigo",
+      "ordem": 7,
+      "n_capitulos": 21,
+      "n_versiculos": 619
+    },
+    {
+      "nome": "Rute",
+      "testamento": "Antigo",
+      "ordem": 8,
+      "n_capitulos": 4,
+      "n_versiculos": 85
+    },
+    {
+      "nome": "1 Samuel",
+      "testamento": "Antigo",
+      "ordem": 9,
+      "n_capitulos": 31,
+      "n_versiculos": 811
+    },
+    {
+      "nome": "2 Samuel",
+      "testamento": "Antigo",
+      "ordem": 10,
+      "n_capitulos": 24,
+      "n_versiculos": 695
+    },
+    {
+      "nome": "1 Reis",
+      "testamento": "Antigo",
+      "ordem": 11,
+      "n_capitulos": 22,
+      "n_versiculos": 817
+    },
+    {
+      "nome": "2 Reis",
+      "testamento": "Antigo",
+      "ordem": 12,
+      "n_capitulos": 25,
+      "n_versiculos": 719
+    },
+    {
+      "nome": "1 Crônicas",
+      "testamento": "Antigo",
+      "ordem": 13,
+      "n_capitulos": 29,
+      "n_versiculos": 942
+    },
+    {
+      "nome": "2 Crônicas",
+      "testamento": "Antigo",
+      "ordem": 14,
+      "n_capitulos": 36,
+      "n_versiculos": 822
+    },
+    {
+      "nome": "Esdras",
+      "testamento": "Antigo",
+      "ordem": 15,
+      "n_capitulos": 10,
+      "n_versiculos": 280
+    },
+    {
+      "nome": "Neemias",
+      "testamento": "Antigo",
+      "ordem": 16,
+      "n_capitulos": 13,
+      "n_versiculos": 406
+    },
+    {
+      "nome": "Ester",
+      "testamento": "Antigo",
+      "ordem": 17,
+      "n_capitulos": 10,
+      "n_versiculos": 167
+    },
+    {
+      "nome": "Jó",
+      "testamento": "Antigo",
+      "ordem": 18,
+      "n_capitulos": 42,
+      "n_versiculos": 1070
+    },
+    {
+      "nome": "Salmos",
+      "testamento": "Antigo",
+      "ordem": 19,
+      "n_capitulos": 150,
+      "n_versiculos": 2461
+    },
+    {
+      "nome": "Provérbios",
+      "testamento": "Antigo",
+      "ordem": 20,
+      "n_capitulos": 31,
+      "n_versiculos": 915
+    },
+    {
+      "nome": "Eclesiastes",
+      "testamento": "Antigo",
+      "ordem": 21,
+      "n_capitulos": 12,
+      "n_versiculos": 222
+    },
+    {
+      "nome": "Cânticos",
+      "testamento": "Antigo",
+      "ordem": 22,
+      "n_capitulos": 8,
+      "n_versiculos": 117
+    },
+    {
+      "nome": "Isaías",
+      "testamento": "Antigo",
+      "ordem": 23,
+      "n_capitulos": 66,
+      "n_versiculos": 1292
+    },
+    {
+      "nome": "Jeremias",
+      "testamento": "Antigo",
+      "ordem": 24,
+      "n_capitulos": 52,
+      "n_versiculos": 1364
+    },
+    {
+      "nome": "Lamentações",
+      "testamento": "Antigo",
+      "ordem": 25,
+      "n_capitulos": 5,
+      "n_versiculos": 154
+    },
+    {
+      "nome": "Ezequiel",
+      "testamento": "Antigo",
+      "ordem": 26,
+      "n_capitulos": 48,
+      "n_versiculos": 1273
+    },
+    {
+      "nome": "Daniel",
+      "testamento": "Antigo",
+      "ordem": 27,
+      "n_capitulos": 12,
+      "n_versiculos": 357
+    },
+    {
+      "nome": "Oséias",
+      "testamento": "Antigo",
+      "ordem": 28,
+      "n_capitulos": 14,
+      "n_versiculos": 197
+    },
+    {
+      "nome": "Joel",
+      "testamento": "Antigo",
+      "ordem": 29,
+      "n_capitulos": 3,
+      "n_versiculos": 73
+    },
+    {
+      "nome": "Amós",
+      "testamento": "Antigo",
+      "ordem": 30,
+      "n_capitulos": 9,
+      "n_versiculos": 146
+    },
+    {
+      "nome": "Obadias",
+      "testamento": "Antigo",
+      "ordem": 31,
+      "n_capitulos": 1,
+      "n_versiculos": 21
+    },
+    {
+      "nome": "Jonas",
+      "testamento": "Antigo",
+      "ordem": 32,
+      "n_capitulos": 4,
+      "n_versiculos": 48
+    },
+    {
+      "nome": "Miquéias",
+      "testamento": "Antigo",
+      "ordem": 33,
+      "n_capitulos": 7,
+      "n_versiculos": 105
+    },
+    {
+      "nome": "Naum",
+      "testamento": "Antigo",
+      "ordem": 34,
+      "n_capitulos": 3,
+      "n_versiculos": 47
+    },
+    {
+      "nome": "Habacuque",
+      "testamento": "Antigo",
+      "ordem": 35,
+      "n_capitulos": 3,
+      "n_versiculos": 56
+    },
+    {
+      "nome": "Sofonias",
+      "testamento": "Antigo",
+      "ordem": 36,
+      "n_capitulos": 3,
+      "n_versiculos": 53
+    },
+    {
+      "nome": "Ageu",
+      "testamento": "Antigo",
+      "ordem": 37,
+      "n_capitulos": 2,
+      "n_versiculos": 38
+    },
+    {
+      "nome": "Zacarias",
+      "testamento": "Antigo",
+      "ordem": 38,
+      "n_capitulos": 14,
+      "n_versiculos": 211
+    },
+    {
+      "nome": "Malaquias",
+      "testamento": "Antigo",
+      "ordem": 39,
+      "n_capitulos": 4,
+      "n_versiculos": 55
+    },
+    {
+      "nome": "Mateus",
+      "testamento": "Novo",
+      "ordem": 40,
+      "n_capitulos": 28,
+      "n_versiculos": 1071
+    },
+    {
+      "nome": "Marcos",
+      "testamento": "Novo",
+      "ordem": 41,
+      "n_capitulos": 16,
+      "n_versiculos": 678
+    },
+    {
+      "nome": "Lucas",
+      "testamento": "Novo",
+      "ordem": 42,
+      "n_capitulos": 24,
+      "n_versiculos": 1151
+    },
+    {
+      "nome": "João",
+      "testamento": "Novo",
+      "ordem": 43,
+      "n_capitulos": 21,
+      "n_versiculos": 879
+    },
+    {
+      "nome": "Atos",
+      "testamento": "Novo",
+      "ordem": 44,
+      "n_capitulos": 28,
+      "n_versiculos": 1007
+    },
+    {
+      "nome": "Romanos",
+      "testamento": "Novo",
+      "ordem": 45,
+      "n_capitulos": 16,
+      "n_versiculos": 433
+    },
+    {
+      "nome": "1 Coríntios",
+      "testamento": "Novo",
+      "ordem": 46,
+      "n_capitulos": 16,
+      "n_versiculos": 437
+    },
+    {
+      "nome": "2 Coríntios",
+      "testamento": "Novo",
+      "ordem": 47,
+      "n_capitulos": 13,
+      "n_versiculos": 257
+    },
+    {
+      "nome": "Gálatas",
+      "testamento": "Novo",
+      "ordem": 48,
+      "n_capitulos": 6,
+      "n_versiculos": 149
+    },
+    {
+      "nome": "Efésios",
+      "testamento": "Novo",
+      "ordem": 49,
+      "n_capitulos": 6,
+      "n_versiculos": 155
+    },
+    {
+      "nome": "Filipenses",
+      "testamento": "Novo",
+      "ordem": 50,
+      "n_capitulos": 4,
+      "n_versiculos": 104
+    },
+    {
+      "nome": "Colossenses",
+      "testamento": "Novo",
+      "ordem": 51,
+      "n_capitulos": 4,
+      "n_versiculos": 95
+    },
+    {
+      "nome": "1 Tessalonicenses",
+      "testamento": "Novo",
+      "ordem": 52,
+      "n_capitulos": 5,
+      "n_versiculos": 89
+    },
+    {
+      "nome": "2 Tessalonicenses",
+      "testamento": "Novo",
+      "ordem": 53,
+      "n_capitulos": 3,
+      "n_versiculos": 47
+    },
+    {
+      "nome": "1 Timóteo",
+      "testamento": "Novo",
+      "ordem": 54,
+      "n_capitulos": 6,
+      "n_versiculos": 113
+    },
+    {
+      "nome": "2 Timóteo",
+      "testamento": "Novo",
+      "ordem": 55,
+      "n_capitulos": 4,
+      "n_versiculos": 83
+    },
+    {
+      "nome": "Tito",
+      "testamento": "Novo",
+      "ordem": 56,
+      "n_capitulos": 3,
+      "n_versiculos": 46
+    },
+    {
+      "nome": "Filemom",
+      "testamento": "Novo",
+      "ordem": 57,
+      "n_capitulos": 1,
+      "n_versiculos": 25
+    },
+    {
+      "nome": "Hebreus",
+      "testamento": "Novo",
+      "ordem": 58,
+      "n_capitulos": 13,
+      "n_versiculos": 303
+    },
+    {
+      "nome": "Tiago",
+      "testamento": "Novo",
+      "ordem": 59,
+      "n_capitulos": 5,
+      "n_versiculos": 108
+    },
+    {
+      "nome": "1 Pedro",
+      "testamento": "Novo",
+      "ordem": 60,
+      "n_capitulos": 5,
+      "n_versiculos": 105
+    },
+    {
+      "nome": "2 Pedro",
+      "testamento": "Novo",
+      "ordem": 61,
+      "n_capitulos": 3,
+      "n_versiculos": 61
+    },
+    {
+      "nome": "1 João",
+      "testamento": "Novo",
+      "ordem": 62,
+      "n_capitulos": 5,
+      "n_versiculos": 105
+    },
+    {
+      "nome": "2 João",
+      "testamento": "Novo",
+      "ordem": 63,
+      "n_capitulos": 1,
+      "n_versiculos": 13
+    },
+    {
+      "nome": "3 João",
+      "testamento": "Novo",
+      "ordem": 64,
+      "n_capitulos": 1,
+      "n_versiculos": 15
+    },
+    {
+      "nome": "Judas",
+      "testamento": "Novo",
+      "ordem": 65,
+      "n_capitulos": 1,
+      "n_versiculos": 25
+    },
+    {
+      "nome": "Apocalipse",
+      "testamento": "Novo",
+      "ordem": 66,
+      "n_capitulos": 22,
+      "n_versiculos": 404
+    }
+  ]
+}

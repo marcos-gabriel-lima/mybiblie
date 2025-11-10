@@ -1,0 +1,157 @@
+generator client {
+    provider = "prisma-client-js"
+    output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+// NextAuth.js models
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  password      String?
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts        Account[]
+  sessions        Session[]
+  favorites       Favorite[]
+  notes           Note[]
+  readingProgress ReadingProgress[]
+
+  @@map("users")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// Biblical content models
+model Book {
+  id         String    @id @default(cuid())
+  name       String
+  testament  String // "Antigo" or "Novo"
+  order      Int       @unique
+  chapters   Chapter[]
+  createdAt  DateTime  @default(now())
+
+  @@map("books")
+}
+
+model Chapter {
+  id       String  @id @default(cuid())
+  bookId   String
+  number   Int
+  verses   Verse[]
+  book     Book    @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  @@unique([bookId, number])
+  @@map("chapters")
+}
+
+model Verse {
+  id        String     @id @default(cuid())
+  chapterId String
+  number    Int
+  text      String     @db.Text
+  chapter   Chapter    @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  favorites Favorite[]
+  notes     Note[]
+
+  @@unique([chapterId, number])
+  @@map("verses")
+}
+
+// User interaction models
+model Favorite {
+  id        String   @id @default(cuid())
+  userId    String
+  verseId   String
+  createdAt DateTime @default(now())
+  
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  verse Verse @relation(fields: [verseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, verseId])
+  @@map("favorites")
+}
+
+model Note {
+  id        String   @id @default(cuid())
+  userId    String
+  verseId   String
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  verse Verse @relation(fields: [verseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, verseId])
+  @@map("notes")
+}
+
+model ReadingPlan {
+  id           String            @id @default(cuid())
+  name         String
+  description  String?
+  duration     Int // days
+  chapters     String[]          // JSON array of chapter references
+  createdAt    DateTime          @default(now())
+  progress     ReadingProgress[]
+
+  @@map("reading_plans")
+}
+
+model ReadingProgress {
+  id           String      @id @default(cuid())
+  userId       String
+  planId       String
+  currentDay   Int         @default(1)
+  completedAt  DateTime?
+  startedAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  
+  user User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan ReadingPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, planId])
+  @@map("reading_progress")
+}
