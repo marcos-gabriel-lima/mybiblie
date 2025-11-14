@@ -61,10 +61,10 @@ function getChapterFromJSON(chapterId: string) {
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: Promise<{ chapterId: string }> }
+  { params }: { params: { chapterId: string } }
 ) {
   try {
-    const { chapterId } = await params
+    const { chapterId } = params
 
     if (!chapterId) {
       return NextResponse.json(

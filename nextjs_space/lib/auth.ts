@@ -6,7 +6,7 @@ import bcrypt from 'bcryptjs'
 import { prisma } from '@/lib/db'
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
+  adapter: prisma ? PrismaAdapter(prisma) : undefined,
   providers: [
     CredentialsProvider({
       name: 'credentials',
@@ -16,6 +16,10 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
+          return null
+        }
+
+        if (!prisma) {
           return null
         }
 

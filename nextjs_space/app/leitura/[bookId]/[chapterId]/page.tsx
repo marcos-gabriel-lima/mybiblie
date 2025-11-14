@@ -1,13 +1,12 @@
 
-'use client'
-
-import { useState, useEffect } from 'react'
-import { Book, ChevronRight, Home, BookOpen, Heart, MessageSquare, ChevronLeft, Settings } from 'lucide-react'
+import { Book, ChevronRight, Home, BookOpen, ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { ThemeToggle } from '@/components/theme-toggle'
+import { prisma } from '@/lib/db'
+import bibliaData from '@/data/biblia_almeida_completa.json'
 
 interface Verse {
   id: string
@@ -30,53 +29,76 @@ interface Props {
   params: { bookId: string; chapterId: string }
 }
 
-export default function ChapterPage({ params }: Props) {
-  const [chapter, setChapter] = useState<Chapter | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
-  const [fontSize, setFontSize] = useState(18)
+interface Chapter {
+  id: string
+  number: number
+  verses: { id: string; number: number; text: string }[]
+  book: { id: string; name: string; testament: string }
+}
 
-  useEffect(() => {
-    async function loadChapter() {
-      try {
-        const response = await fetch(`/api/chapters/${params.chapterId}`)
-        if (!response.ok) {
-          throw new Error('Capítulo não encontrado')
+function getChapterFromJSON(chapterId: string): Chapter | null {
+  const match = chapterId.match(/chapter-(\d+)-(\d+)/)
+  if (!match) return null
+  const bookNumber = parseInt(match[1])
+  const chapterNumber = parseInt(match[2])
+  const livroData = bibliaData.livros[bookNumber - 1]
+  if (!livroData) return null
+  const capituloData = livroData.capitulos.find((cap: any) => cap.numero === chapterNumber)
+  if (!capituloData) return null
+  return {
+    id: chapterId,
+    number: chapterNumber,
+    verses: capituloData.versiculos.map((v: any) => ({
+      id: `verse-${bookNumber}-${chapterNumber}-${v.numero}`,
+      number: v.numero,
+      text: v.texto,
+    })),
+    book: {
+      id: `book-${bookNumber}`,
+      name: livroData.nome,
+      testament: livroData.testamento,
+    },
+  }
+}
+
+export const revalidate = 3600
+
+export default async function ChapterPage({ params }: Props) {
+  const { chapterId } = params
+  let chapter: Chapter | null = null
+
+  if (prisma) {
+    try {
+      const dbChapter = await prisma.chapter.findUnique({
+        where: { id: chapterId },
+        include: {
+          verses: { orderBy: { number: 'asc' } },
+          book: { select: { id: true, name: true, testament: true } },
+        },
+      })
+      if (dbChapter) {
+        chapter = {
+          id: dbChapter.id,
+          number: dbChapter.number,
+          verses: dbChapter.verses.map((v) => ({ id: v.id, number: v.number, text: v.text })),
+          book: dbChapter.book,
         }
-        const data = await response.json()
-        setChapter(data)
-      } catch (error) {
-        setError('Erro ao carregar capítulo')
-        console.error('Erro:', error)
-      } finally {
-        setLoading(false)
       }
-    }
-
-    loadChapter()
-  }, [params.chapterId])
-
-  const handleVerseClick = (verse: Verse) => {
-    // Implementar ações do versículo (favoritar, adicionar nota, etc.)
-    console.log('Versículo clicado:', verse)
+    } catch {}
   }
 
-  if (loading) {
+  if (!chapter) {
+    chapter = getChapterFromJSON(chapterId)
+  }
+
+  // Garantir consistência de IDs para navegação
+  const bookId = chapter.book.id
+
+  if (!chapter) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="spinner mb-4"></div>
-          <p className="text-muted-foreground">Carregando capítulo...</p>
-        </div>
-      </div>
-    )
-  }
-
-  if (error || !chapter) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-red-600 mb-4">{error || 'Capítulo não encontrado'}</p>
+          <p className="text-red-600 mb-4">Capítulo não encontrado</p>
           <Link href="/leitura">
             <Button>Voltar à Leitura</Button>
           </Link>
@@ -100,7 +122,7 @@ export default function ChapterPage({ params }: Props) {
               <span>Leitura</span>
             </Link>
             <ChevronRight className="h-3 w-3 text-muted-foreground" />
-            <Link href={`/leitura/${chapter.book.id}`} className="hover:text-primary">
+            <Link href={`/leitura/${bookId}`} className="hover:text-primary">
               <span>{chapter.book.name}</span>
             </Link>
             <ChevronRight className="h-3 w-3 text-muted-foreground" />
@@ -110,23 +132,6 @@ export default function ChapterPage({ params }: Props) {
           </div>
           
           <div className="flex items-center space-x-2">
-            <div className="flex items-center space-x-1">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setFontSize(Math.max(14, fontSize - 2))}
-              >
-                A-
-              </Button>
-              <span className="text-xs text-muted-foreground">{fontSize}px</span>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setFontSize(Math.min(24, fontSize + 2))}
-              >
-                A+
-              </Button>
-            </div>
             <ThemeToggle />
           </div>
         </div>
@@ -159,8 +164,7 @@ export default function ChapterPage({ params }: Props) {
               {chapter.verses?.map((verse) => (
                 <div
                   key={verse.id}
-                  className="group relative p-4 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer"
-                  onClick={() => handleVerseClick(verse)}
+                  className="group relative p-4 rounded-lg hover:bg-muted/50 transition-colors"
                 >
                   <div className="flex gap-4">
                     <div className="flex-shrink-0">
@@ -171,21 +175,11 @@ export default function ChapterPage({ params }: Props) {
                     <div className="flex-1">
                       <p 
                         className="text-foreground leading-relaxed"
-                        style={{ fontSize: `${fontSize}px`, lineHeight: 1.7 }}
+                        style={{ fontSize: `18px`, lineHeight: 1.7 }}
                       >
                         {verse.text}
                       </p>
                     </div>
-                  </div>
-                  
-                  {/* Verse Actions */}
-                  <div className="absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
-                    <Button variant="ghost" size="sm">
-                      <Heart className="h-4 w-4" />
-                    </Button>
-                    <Button variant="ghost" size="sm">
-                      <MessageSquare className="h-4 w-4" />
-                    </Button>
                   </div>
                 </div>
               ))}
@@ -195,7 +189,7 @@ export default function ChapterPage({ params }: Props) {
 
         {/* Navigation */}
         <div className="flex justify-between items-center">
-          <Link href={`/leitura/${chapter.book.id}`}>
+          <Link href={`/leitura/${bookId}`}>
             <Button variant="outline">
               <ChevronLeft className="mr-2 h-4 w-4" />
               Voltar aos Capítulos

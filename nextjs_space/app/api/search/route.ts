@@ -9,21 +9,23 @@ function searchInJSON(query: string, limit: number = 100) {
   const queryLower = query.toLowerCase()
   const results: any[] = []
   
-  for (const livro of bibliaData.livros) {
+  for (let i = 0; i < bibliaData.livros.length; i++) {
+    const livro = bibliaData.livros[i]
+    const bookOrder = i + 1
     for (const capitulo of livro.capitulos) {
       for (const versiculo of capitulo.versiculos) {
         if (versiculo.texto.toLowerCase().includes(queryLower)) {
           results.push({
-            id: `verse-${livro.ordem}-${capitulo.numero}-${versiculo.numero}`,
-            chapterId: `chapter-${livro.ordem}-${capitulo.numero}`,
+            id: `verse-${bookOrder}-${capitulo.numero}-${versiculo.numero}`,
+            chapterId: `chapter-${bookOrder}-${capitulo.numero}`,
             number: versiculo.numero,
             text: versiculo.texto,
             chapter: {
-              id: `chapter-${livro.ordem}-${capitulo.numero}`,
-              bookId: `book-${livro.ordem}`,
+              id: `chapter-${bookOrder}-${capitulo.numero}`,
+              bookId: `book-${bookOrder}`,
               number: capitulo.numero,
               book: {
-                id: `book-${livro.ordem}`,
+                id: `book-${bookOrder}`,
                 name: livro.nome,
                 testament: livro.testamento,
               },

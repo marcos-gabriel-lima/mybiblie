@@ -56,14 +56,13 @@ function getBookFromJSON(bookId: string) {
     
     // Criar estrutura compatível com o que o banco retornaria
     const book = {
-      id: `book-${livroData.ordem || bookNumber}`,
+      id: `book-${bookNumber}`,
       name: livroData.nome,
       testament: livroData.testamento,
-      order: livroData.ordem || bookNumber,
-      createdAt: new Date(),
+      order: bookNumber,
       chapters: livroData.capitulos.map((capitulo: any) => ({
-        id: `chapter-${livroData.ordem}-${capitulo.numero}`,
-        bookId: `book-${livroData.ordem || bookNumber}`,
+        id: `chapter-${bookNumber}-${capitulo.numero}`,
+        bookId: `book-${bookNumber}`,
         number: capitulo.numero,
         _count: {
           verses: capitulo.versiculos?.length || 0
@@ -79,11 +78,11 @@ function getBookFromJSON(bookId: string) {
 }
 
 interface Props {
-  params: Promise<{ bookId: string }>
+  params: { bookId: string }
 }
 
 export default async function BookPage({ params }: Props) {
-  const { bookId } = await params
+  const { bookId } = params
   const book = await getBookWithChapters(bookId)
 
   if (!book) {
@@ -207,3 +206,4 @@ export default async function BookPage({ params }: Props) {
     </div>
   )
 }
+export const revalidate = 3600

@@ -41,7 +41,6 @@ function getBooksFromJSON() {
       name: livro.nome,
       testament: livro.testamento,
       order: livro.ordem,
-      createdAt: new Date(),
       chapters: Array.from({ length: livro.n_capitulos }, (_, i) => ({
         id: `chapter-${livro.ordem}-${i + 1}`,
         bookId: `book-${livro.ordem}`,
@@ -190,3 +189,4 @@ export default async function LeituraPage() {
     </div>
   )
 }
+export const revalidate = 3600
