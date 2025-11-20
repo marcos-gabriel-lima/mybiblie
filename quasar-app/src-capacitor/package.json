@@ -1,0 +1,13 @@
+{
+  "name": "biblia",
+  "version": "0.0.1",
+  "description": "um projeto open source da biblia",
+  "author": "Marco Gabriel Lima <marcos.gabriel.lima@example.com>",
+  "private": true,
+  "dependencies": {
+    "@capacitor/android": "^7.4.4",
+    "@capacitor/app": "^7.0.0",
+    "@capacitor/cli": "^7.0.0",
+    "@capacitor/core": "^7.0.0"
+  }
+}

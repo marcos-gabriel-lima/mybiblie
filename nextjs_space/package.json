@@ -4,8 +4,14 @@
   "scripts": {
     "dev": "next dev -p 3010",
     "build": "next build",
+    "build:static": "CAPACITOR=true next build",
     "start": "next start -p 3010",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cap:sync": "npx cap sync",
+    "cap:open": "npx cap open android",
+    "android:build": "npm run build:static && npx cap sync && npx cap open android",
+    "android:build:url": "npm run build && npx cap sync && npx cap open android",
+    "android:sync": "npx cap sync android"
   },
   "prisma": {
     "seed": "tsx --require dotenv/config scripts/seed.ts"

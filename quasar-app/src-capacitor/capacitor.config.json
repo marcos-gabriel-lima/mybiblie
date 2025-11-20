@@ -1,0 +1,15 @@
+{
+  "appId": "com.bibliaalmeida.app",
+  "appName": "Bíblia Sagrada Almeida",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": true
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 2000,
+      "launchAutoHide": true,
+      "backgroundColor": "#1e40af"
+    }
+  }
+}

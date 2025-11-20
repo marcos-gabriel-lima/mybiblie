@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Bíblia Sagrada Almeida</string>
+    <string name="title_activity_main">Bíblia Sagrada Almeida</string>
+    <string name="package_name">com.bibliaalmeida.app</string>
+    <string name="custom_url_scheme">com.bibliaalmeida.app</string>
+</resources>
