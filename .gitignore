@@ -41,6 +41,11 @@ next-env.d.ts
 *~
 .DS_Store
 
+# AI Tools
+.trae/
+.cursor/
+.abacus.donotdelete
+
 # Prisma
 prisma/migrations/
 
